@@ -357,6 +357,10 @@ Build a shadcn-style site with:
 
 Each custom component should have a matching documentation page and registry item. The docs page should use the same source files that the registry distributes so the examples cannot drift from the installable code.
 
+Add a theme laboratory that switches between registered application themes and exposes colour, typography, spacing, radius, elevation, density, motion, focus, and component states. Changes made in the laboratory should export a reviewable token proposal rather than mutate production themes directly.
+
+Use a typed component manifest to generate the component catalogue, documentation navigation, package exports, registry metadata, MCP records, status badges, and provenance details. Add stable `data-slot` markers to public component parts for styling, testing, debugging, and agent inspection.
+
 ## shadcn registry
 
 Use the official registry format:

@@ -24,6 +24,10 @@ This directory records the product, architecture, security, and delivery decisio
 - [RFC-0001: Component lifecycle](./rfc/RFC-0001-component-lifecycle.md)
 - [RFC-0002: App theme registration](./rfc/RFC-0002-app-theme-registration.md)
 
+## Reference reviews
+
+- [Neobrutalism Components](./research/neobrutalism-components-review.md)
+
 ## Standards
 
 - [Component authoring](./standards/component-authoring.md)
