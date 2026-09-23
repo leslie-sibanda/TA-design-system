@@ -2,7 +2,7 @@
 
 ## Allowed initial capabilities
 
-External agents may list and search approved components, documentation, examples, tokens, themes, and registry metadata. They may retrieve install commands and stable source files intended for consumers.
+External agents with HTTP access may retrieve approved public static documentation, discovery files and consumer metadata. Initial integration does not expose repository filesystem access or an external MCP transport; that server is deferred by [ADR-0007](../adr/ADR-0007-static-agent-access-without-external-mcp.md). Publish source or install instructions only when approved for consumers.
 
 Browser agents may search documentation, open component pages, inspect public metadata, and copy approved examples or installation commands while the site is open.
 

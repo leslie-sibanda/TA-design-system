@@ -13,7 +13,7 @@ The system provides reusable, accessible TeacherActive interface components for 
 - **Patterns package:** `@teacheractive/patterns` contains proven reusable compositions without contaminating generic primitives with product logic.
 - **Registry:** shadcn-compatible metadata distributes the same canonical source as copy-into-project components, themes, and blocks.
 - **Theme lab:** renders every state across every registered theme for visual review and regression testing.
-- **MCP server:** provides read-only component, token, documentation, example, and registry resources to external agents.
+- **Static agent records:** public component Markdown, discovery files and metadata serve agents with HTTP access. An external MCP server is deferred by [ADR-0007](../adr/ADR-0007-static-agent-access-without-external-mcp.md).
 - **WebMCP adapter:** exposes safe, page-scoped documentation and navigation tools to supported browser agents.
 
 ## Dependency direction
@@ -27,7 +27,7 @@ tokens → themes
           ↓          ↓
         docs       registry
           ↓          ↓
-        WebMCP      MCP
+        WebMCP   static agent records
 ```
 
 Dependencies flow from foundations toward products. Tokens and shared UI must never depend on an application, documentation route, registry payload, or agent adapter.

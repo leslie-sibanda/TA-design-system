@@ -2,7 +2,7 @@
 
 ## Status and intent
 
-Accepted design direction; production implementation is pending. [ADR-0005](../adr/ADR-0005-webmcp-component-documentation.md) records the shared Markdown and WebMCP decision, extending [ADR-0004](../adr/ADR-0004-agent-access.md) without broadening its permissions. The [design status](../design/site-design-status.md) records the approved interface and known gaps.
+Accepted design direction; production implementation is pending. [ADR-0007](../adr/ADR-0007-static-agent-access-without-external-mcp.md) limits initial delivery to static documentation and browser WebMCP, deferring the external MCP server. [ADR-0005](../adr/ADR-0005-webmcp-component-documentation.md) records the shared Markdown and WebMCP decision, extending [ADR-0004](../adr/ADR-0004-agent-access.md) without broadening its permissions. The [design status](../design/site-design-status.md) records the approved interface and known gaps.
 
 Every component detail page offers **View Markdown** and **Copy Markdown** in its Reference section. Humans and agents should retrieve the same guidance without scraping the visual site or depending on browser-agent support.
 
@@ -30,15 +30,15 @@ Draft APIs must be marked as illustrative. Never invent release versions, suppor
 ## Human and HTTP interfaces
 
 - Proposed route: `/components/{id}.md`, for example `/components/button.md`.
-- Return UTF-8 plain Markdown with `Content-Type: text/markdown; charset=utf-8`.
-- Resolve IDs through the component manifest; unknown IDs return 404.
+- Emit UTF-8 Markdown as static files during the build, following [ADR-0006](../adr/ADR-0006-github-pages-static-deployment.md). GitHub Pages controls response headers; do not promise a configurable `text/markdown` content type.
+- Generate files only for IDs in the component manifest; unknown public paths return the static host's 404. Prefix public URLs with the configured project base path.
 - View Markdown opens the public Markdown URL; Copy Markdown copies the same content and announces success accessibly.
 - Clipboard failure offers readable, selectable Markdown rather than falsely reporting success.
 - `llms.txt` lists discoverable Markdown URLs. Any full-document export uses the same content graph.
 
 Ordinary links and HTTP access remain available when WebMCP is unsupported.
 
-## MCP and WebMCP
+## WebMCP and static agent access
 
 Proposed tool contract:
 
@@ -47,13 +47,13 @@ get_component_docs({ id: "button" })
 // -> { id, title, status, version?, sourceUrl, markdown }
 ```
 
-The external MCP server and progressively enhanced browser WebMCP adapter consume the same read-only records. Exact registration APIs and transport schemas must be checked against the chosen implementations during scaffolding; they are not specified by this preview.
+The progressively enhanced browser WebMCP adapter consumes the same read-only records as the public Markdown export. Other agents can fetch Markdown and `llms.txt` through HTTP; this is not an MCP transport. No external MCP server, transport or server-specific tests are in the initial scope. Exact browser registration APIs and tool schemas must be checked against the chosen implementation; they are not specified by this preview.
 
 Validate a bounded component ID against a fixed manifest. Accept no paths, arbitrary URLs or write operations. Apply response-size limits and structured errors without exposing filesystem details. Follow the [agent access policy](../security/agent-access-policy.md).
 
 ## Verification before release
 
-- Contract tests for known and unknown IDs, content type, output schema and size limits.
+- Contract tests for known and unknown IDs, readable exported UTF-8 bytes, actual host content types, output schema and size limits.
 - Rejection tests for path traversal, arbitrary URLs and unsupported parameters.
 - Markdown export tests covering tables, links, code fences, MDX examples and lifecycle metadata.
 - Parity tests between HTML documentation, Markdown endpoints and agent records.

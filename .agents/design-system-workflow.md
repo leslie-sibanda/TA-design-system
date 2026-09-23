@@ -7,7 +7,7 @@ Use this workflow for every component, pattern, theme, or documentation change.
 3. Check existing components and registry items before introducing a new API.
 4. Implement in the canonical package directory.
 5. Exercise all states in the theme lab and supported app themes.
-6. Update public docs, examples, registry metadata, and MCP resources together.
+6. Update public docs, examples, registry metadata and static agent records together. Initial agent access uses WebMCP and public Markdown; external MCP is deferred under ADR-0007.
 7. Run deterministic checks before agent evaluations.
 8. Record findings, decisions, and remaining work in the active delivery review and handoff.
 

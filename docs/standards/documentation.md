@@ -25,5 +25,5 @@ Every stable component page includes:
 
 ## Synchronisation
 
-Docs, source, examples, registry metadata, MCP resources, and `llms.txt` indexes must be updated in the same change. CI should fail when a stable registry item lacks its required page or when documented examples no longer compile.
+Docs, source, examples, registry metadata, public agent records, WebMCP outputs and `llms.txt` indexes must be updated in the same change. CI should fail when a stable registry item lacks its required page or when documented examples no longer compile.
 

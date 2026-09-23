@@ -16,7 +16,7 @@ Define one path from component request to supported release across packages, reg
 5. **Verification:** test behaviour, accessibility, themes, package exports, registry installation, and production build.
 6. **Documentation:** publish usage, API, accessibility, theming, migration, and related-component guidance.
 7. **Review:** resolve API, visual, accessibility, QA, and security findings.
-8. **Release:** version package and registry outputs together, then update MCP and search indexes.
+8. **Release:** version package and registry outputs together, then update static agent records and search indexes. External MCP is deferred under ADR-0007.
 9. **Maintenance:** track deprecations and provide migrations before removal.
 
 ## Stability levels

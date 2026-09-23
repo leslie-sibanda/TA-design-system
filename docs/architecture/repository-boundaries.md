@@ -11,7 +11,7 @@
 | `content/docs` | Published documentation content | Architecture decisions or generated registry files |
 | `docs` | Product, architecture, standards, security, ADRs, RFCs | Runtime implementation |
 | `registry` | Registry manifests and generated payload definitions | A second editable component implementation |
-| `mcp` | Read-only agent resources and retrieval tools | Repository writes or arbitrary filesystem reads |
+| `mcp` (deferred) | No package in the initial scope; revisit only under a new ADR | Initial-release server scaffolding, repository writes or arbitrary filesystem reads |
 | `src` | Documentation application shell and adapters | Canonical shared component source |
 
 ## Promotion rules

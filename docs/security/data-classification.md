@@ -14,7 +14,7 @@ Security findings, private vulnerability reports, unpublished credentials, custo
 
 ## Handling rules
 
-- Public data may be exposed through docs, registry, MCP, and WebMCP after review.
+- Public data may be exposed through docs, registry files, static agent records and WebMCP after review. External MCP is deferred under ADR-0007.
 - Internal data may be available to authenticated repository collaborators but is excluded from public endpoints and default agent resources.
 - Restricted data must never enter client bundles, public docs, examples, fixtures, prompts, generated reports, MCP responses, or registry payloads.
 - Test and example data must be synthetic and must not resemble real personal records closely enough to be mistaken for production data.

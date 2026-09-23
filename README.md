@@ -10,4 +10,4 @@ Start with:
 
 The visual direction is approved and demonstrated in a local HTML prototype. Next.js/Fumadocs scaffolding, shared components and agent services are not implemented yet.
 
-See the [approved design and current status](./docs/design/site-design-status.md) for decisions, remaining work and the unresolved button contrast issue. The [WebMCP ADR](./docs/adr/ADR-0005-webmcp-component-documentation.md) records the accepted read-only agent documentation approach.
+See the [approved design and current status](./docs/design/site-design-status.md) for decisions, remaining work and the unresolved button contrast issue. The [current agent-access ADR](./docs/adr/ADR-0007-static-agent-access-without-external-mcp.md) defines initial access through WebMCP and static Markdown, with the external MCP server deferred.
