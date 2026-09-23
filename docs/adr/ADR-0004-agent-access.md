@@ -17,6 +17,10 @@ Provide:
 
 Initial agent interfaces cannot write repository files, execute arbitrary commands, or read arbitrary filesystem paths.
 
+## Related decisions
+
+[ADR-0005](./ADR-0005-webmcp-component-documentation.md) extends this decision with a shared component Markdown record, progressively enhanced WebMCP retrieval and public HTTP fallbacks. It does not broaden the read-only permissions defined here.
+
 ## Consequences
 
 - MCP and WebMCP schemas become tested public interfaces.
