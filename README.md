@@ -29,4 +29,6 @@ SITE_BASE_PATH=/TA-design-system PORT=8080 pnpm serve:export
 
 Open `http://127.0.0.1:8080/TA-design-system/`. For root-path development, omit `SITE_BASE_PATH` when both building and serving. Browser tests use a separate server on port 4173 and never reuse a running development server.
 
+On this development machine, WebKit system libraries are unavailable. The owner chose CI-only WebKit verification. Run the explicit local scope with `SITE_BASE_PATH=/TA-design-system PLAYWRIGHT_PROJECTS=chromium,mobile,firefox pnpm check`. CI must omit `PLAYWRIGHT_PROJECTS` and install all browser dependencies; the default check runs every configured engine.
+
 See the [approved design and current status](./docs/design/site-design-status.md) for decisions, remaining work and the unresolved button contrast issue. The [current agent-access ADR](./docs/adr/ADR-0007-static-agent-access-without-external-mcp.md) defines initial access through WebMCP and static Markdown, with the external MCP server deferred.

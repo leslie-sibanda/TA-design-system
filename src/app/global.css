@@ -67,7 +67,8 @@ button { cursor: pointer; }
 .prose { max-width: none; color: var(--text); }
 .prose h2 { font-size: 22px; margin-top: 32px; }
 .prose h2,.prose h3 { scroll-margin-top: 100px; }
-.prose pre { max-width: 100%; overflow: auto; }
+.docs-main > h1 { overflow-wrap: anywhere; }
+.search-error { padding: 20px; color: var(--text); }
 .prose th,.prose td { overflow-wrap: anywhere; }
 .prose :where(h1,h2,h3,h4,p,li) { overflow-wrap: anywhere; }
 .page-toc { font-size: 12px; border-left: 1px solid var(--border); padding-left: 16px; align-self: start; position: sticky; top: 110px; }
