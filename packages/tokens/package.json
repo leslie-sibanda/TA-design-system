@@ -1,0 +1,1 @@
+{"name":"@teacheractive/tokens","version":"0.0.0","private":true,"exports":{"./primitive.css":"./src/primitive.css","./semantic.css":"./src/semantic.css"}}

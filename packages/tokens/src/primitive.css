@@ -1,0 +1,12 @@
+:root {
+  --ta-blue: #005292;
+  --ta-orange: #f57d00;
+  --ta-white: #ffffff;
+  --ta-ink: #182b3a;
+  --ta-muted: #536675;
+  --ta-border: #dce5eb;
+  --ta-control-border: #718898;
+  --ta-soft: #f4f8fb;
+  --ta-selected: #eaf3fa;
+  --ta-font: Arial, Helvetica, sans-serif;
+}

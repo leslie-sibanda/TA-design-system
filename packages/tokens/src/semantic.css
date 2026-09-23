@@ -1,0 +1,15 @@
+:root {
+  --surface: var(--ta-white);
+  --surface-muted: var(--ta-soft);
+  --text: var(--ta-ink);
+  --text-muted: var(--ta-muted);
+  --heading: var(--ta-blue);
+  --action: var(--ta-orange);
+  --action-foreground: var(--ta-ink);
+  --border: var(--ta-border);
+  --control-border: var(--ta-control-border);
+  --focus-ring: var(--ta-blue);
+  --selected: var(--ta-selected);
+  --font-body: var(--ta-font);
+  --radius-control: 6px;
+}

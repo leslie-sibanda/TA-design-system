@@ -1,0 +1,9 @@
+[data-ta-theme='teacheractive'][data-ta-mode='light'] {
+  color-scheme: light;
+  --surface: var(--ta-white);
+  --heading: var(--ta-blue);
+  --action: var(--ta-orange);
+  /* Design-owner-approved accessible foreground; preview history is unchanged. */
+  --action-foreground: var(--ta-ink);
+  --focus-ring: var(--ta-blue);
+}

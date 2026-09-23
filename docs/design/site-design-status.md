@@ -2,7 +2,7 @@
 
 - **Recorded:** 2026-09-23
 - **Design status:** Accepted visual direction following interactive review
-- **Implementation status:** HTML prototype only; Next.js scaffolding has not started
+- **Implementation status:** Next.js/Fumadocs static scaffold implemented on the implementation branch; shared components and agent exports remain pending
 
 This record captures the agreed documentation-site design and the remaining implementation work. It supplements the [master plan](../agent-ready-design-system-plan.md) and [documentation-site architecture](../architecture/documentation-site.md). Design approval does not approve an unimplemented component API or waive release checks.
 
@@ -43,11 +43,11 @@ Asset provenance, dimensions and limitations are recorded in the [asset inventor
 
 The selected sidebar item uses a soft background without the solid blue inset stripe. The approved preview uses white text on the original orange button background, including hover; the darker orange proposal was rejected.
 
-### Unresolved contrast issue
+### Contrast decision resolved for implementation
 
 White text on `#F57D00` has approximately **2.69:1** contrast. This fails WCAG AA for both normal text (4.5:1) and large text (3:1). The visual preference is recorded, but it is not a production accessibility exception.
 
-The design owner must review a compliant foreground/background treatment before release. Keep the issue visible in documentation and agent output until resolved. Do not silently darken the brand orange or claim the current button meets the repository accessibility standard.
+On 2026-09-23, the design owner approved **brand orange with dark text** for the real application. Production uses `#182B3A` on `#F57D00`, approximately 5.43:1. The historical HTML prototype retains white labels and is not the production accessibility baseline. Automated homepage axe checks pass with the new pairing; full component and theme verification remains required.
 
 ## Component page layout
 
@@ -116,21 +116,20 @@ Working companion sessions are under `.superpowers/brainstorm/`. Local sessions 
 
 A Superpowers visual-companion server serves the preview on a session-specific localhost port. It requires a session URL and stops after inactivity. Session keys and local browser links are not stable documentation URLs. Restarting the companion may create a new session directory; copy the latest HTML and assets when necessary.
 
-Completed checks were limited to JavaScript syntax, selected template rendering, served-content checks and selected colour contrast calculations. The visual direction was reviewed interactively. Full browser automation, device testing, screen-reader checks and repository release verification have not run.
+Prototype checks were limited to JavaScript syntax, selected template rendering, served-content checks and contrast calculations. The visual direction was reviewed interactively. The implementation now has type, lint, unit, exported-artifact, accessibility and browser checks; see the [current handoff](../../delivery/handoffs/current.md) for the exact verified scope. Manual screen-reader review and a real GitHub deployment remain pending.
 
-No Next.js/Fumadocs application, package API, registry endpoint, Markdown HTTP endpoint, MCP server or WebMCP registration has been implemented. Catalogue categories and several page examples are illustrative. Search filters a short preview link list, not a complete production index. Clipboard behaviour still needs browser verification.
+The Next.js/Fumadocs application includes the branded homepage, responsive navigation, static catalogue/detail routes and a generated static search index. Component pages clearly label proposed APIs rather than presenting them as released packages. Pages and Styling are honest placeholders. No shared component API, registry endpoint, Markdown HTTP endpoint, MCP server or WebMCP registration has been implemented. The historical prototype still uses its short preview search list and illustrative fixtures; its behaviour is not evidence of production functionality.
 
 ## Delivery requirements
 
 Deploy the real site to GitHub Pages as a Next.js static export, as specified in [ADR-0006](../adr/ADR-0006-github-pages-static-deployment.md). Use the installed frontend skills, test-driven implementation and automated GitHub Actions verification/deployment. Static search and base-path handling are required. [ADR-0007](../adr/ADR-0007-static-agent-access-without-external-mcp.md) defers the external MCP server entirely; initial access is browser WebMCP plus public Markdown and `llms.txt`.
 
-The [scaffold plan](../superpowers/plans/2026-09-23-nextjs-site-scaffold.md) includes these requirements. No application workflow or Pages deployment has been created yet.
+The [scaffold plan](../superpowers/plans/2026-09-23-nextjs-site-scaffold.md) includes these requirements. The implementation uses a small GitHub Actions caller with separate reusable verification and deployment workflows, as requested by the owner. Repository Pages configuration and an actual deployment have not been performed.
 
 ## Next implementation steps
 
-1. Resolve the button contrast issue and confirm component API conventions.
-2. Write and review a scaffolding plan and acceptance contract based on this design.
-3. Scaffold Next.js/Fumadocs and canonical package boundaries; do not transplant the monolithic prototype as application architecture.
-4. Implement shared tokens, components, responsive documentation pages and source examples.
-5. Generate static Markdown and discovery records, then add progressively enhanced read-only WebMCP tools. Do not build an external MCP server in the initial scope.
-6. Run the required type, unit, accessibility, contract, registry, build and browser checks before release.
+1. Review the scaffold and run the GitHub workflow, including CI-only WebKit verification, before release.
+2. Implement canonical Base UI components, confirm their APIs and replace proposal-only examples with live previews.
+3. Build the scoped Styling canvas from those shared components and theme mappings.
+4. Generate static Markdown and discovery records, then progressively enhance with read-only WebMCP tools. Do not build an external MCP server in the initial scope.
+5. Add registry and component/theme release checks as those surfaces are implemented.

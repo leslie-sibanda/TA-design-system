@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm build
+pnpm test:contract
+if [[ -n "${PLAYWRIGHT_PROJECTS:-}" ]]; then
+  IFS=',' read -r -a projects <<< "$PLAYWRIGHT_PROJECTS"
+  args=()
+  for project in "${projects[@]}"; do args+=("--project=$project"); done
+  printf 'Explicit browser scope: %s (CI must run all projects)\n' "$PLAYWRIGHT_PROJECTS"
+  pnpm test:e2e "${args[@]}"
+else
+  pnpm test:e2e
+fi

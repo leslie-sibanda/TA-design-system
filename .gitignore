@@ -1,2 +1,18 @@
 # Local visual companion sessions contain access tokens and runtime state.
 .superpowers/
+
+# Isolated implementation worktrees.
+.worktrees/
+
+node_modules/
+.next/
+out/
+.source/
+.fumadocs/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+next-env.d.ts
+.env*
+!.env.example
