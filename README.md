@@ -20,22 +20,24 @@ pnpm exec playwright install --with-deps chromium firefox webkit
 pnpm dev
 ```
 
-Run the same static-export checks used for the GitHub Pages project path:
+Run the full verification and serve the static export. Both default to the site root, so no environment variables are needed:
 
 ```bash
-SITE_BASE_PATH=/TA-design-system pnpm check
-SITE_BASE_PATH=/TA-design-system PORT=8080 pnpm serve:export
+pnpm check
+PORT=8080 pnpm serve:export
 ```
 
-Open `http://127.0.0.1:8080/TA-design-system/`. For root-path development, omit `SITE_BASE_PATH` when both building and serving. Browser tests use a separate server on port 4173 and never reuse a running development server.
+Open `http://127.0.0.1:8080/`. Browser tests use a separate server on port 4173 and never reuse a running development server.
 
-On this development machine, WebKit system libraries are unavailable. The owner chose CI-only WebKit verification. Run the explicit local scope with `SITE_BASE_PATH=/TA-design-system PLAYWRIGHT_PROJECTS=chromium,mobile,firefox pnpm check`. CI must omit `PLAYWRIGHT_PROJECTS` and install all browser dependencies; the default check runs every configured engine.
+`SITE_BASE_PATH` is a deployment setting, not part of everyday local commands. The GitHub Pages project site is served at `https://leslie-sibanda.github.io/TA-design-system/`, so CI builds the deployed artifact with `SITE_BASE_PATH=/TA-design-system` (and also verifies the root build). Set it locally only to reproduce that CI configuration, and set it for both `pnpm build`/`pnpm check` and `pnpm serve:export`.
+
+On this development machine, WebKit system libraries are unavailable. The owner chose CI-only WebKit verification. Run the explicit local scope with `PLAYWRIGHT_PROJECTS=chromium,mobile,firefox pnpm check`. CI must omit `PLAYWRIGHT_PROJECTS` and install all browser dependencies; the default check runs every configured engine.
 
 ## GitHub delivery
 
 The small caller `.github/workflows/pages.yml` invokes two reusable workflows:
 
-- `verify-site.yml`: frozen install, all-browser verification and static-artifact checks at both root and `/TA-design-system` paths. Pull requests have read-only permissions and never upload a deployment artifact.
+- `verify-site.yml`: frozen install, all-browser verification and static-artifact checks at both root and `/TA-design-system` paths (the only place `SITE_BASE_PATH` is set). Pull requests have read-only permissions and never upload a deployment artifact.
 - `deploy-site.yml`: main-only deployment of the verified project-path artifact, without rebuilding. Only this job receives Pages and OIDC write permissions, through the `github-pages` environment.
 
 Before the first deployment, a repository owner must choose **GitHub Actions** as the Pages source, restrict the `github-pages` environment to `main`, and make the verification jobs required checks. These settings and a real GitHub run have not been performed. Never pass `PLAYWRIGHT_PROJECTS` in CI. Official external actions are pinned to commit revisions resolved from their upstream tags; review updates before changing pins.

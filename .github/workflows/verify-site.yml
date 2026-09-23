@@ -18,6 +18,7 @@ jobs:
       matrix:
         base_path: ['', '/TA-design-system']
     env:
+      # Deployment-only: Pages serves this project at /TA-design-system; local commands default to root.
       SITE_BASE_PATH: ${{ matrix.base_path }}
       NEXT_TELEMETRY_DISABLED: '1'
     steps:

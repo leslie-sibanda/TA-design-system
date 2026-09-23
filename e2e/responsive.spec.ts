@@ -49,13 +49,18 @@ test('search keyboard shortcut and Escape restore trigger focus', async ({ page 
   await expect(trigger).toBeFocused();
 });
 test('documentation, menu and search have no automated accessibility violations', async ({ page }) => {
+  // Axe samples blended colours mid fade-in, so scan only once open/close animations have finished.
+  const settled = () => page.evaluate(() => Promise.all(document.getAnimations().map((animation) => animation.finished.catch(() => undefined))));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${base}/components/button/`);
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.getByRole('button', { name: 'Open navigation' }).click();
+  await settled();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: /^Search/ }).click();
+  await expect(page.getByRole('textbox', { name: 'Search' })).toBeVisible();
+  await settled();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
 });
 test('long content, enlarged text and reduced motion do not widen the document', async ({ page }) => {

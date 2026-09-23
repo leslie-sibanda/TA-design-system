@@ -15,7 +15,7 @@ Implemented routes: homepage, component catalogue and four proposal pages, Found
 - Local tests use one browser worker to reduce contention with other development processes.
 - Observed failing tests before implementing path validation, export serving, homepage identity, route navigation and static search behaviour.
 - Responsive tests exposed low syntax-highlight contrast caused by a changed code background, a nested unfocusable scroll area and unbroken heading overflow. Preserving the highlighter's white background, keeping one focusable code viewport and wrapping headings resolved these without suppressing axe rules.
-- Latest full project-prefix check: types, lint, 7 unit tests, build, 4 artifact contracts and 41 Chromium/mobile/Firefox browser tests pass. The earlier full root-path check passed 39 browser tests; the two subsequently added forced-colour/skip-link checks have been verified at the project prefix. CI runs the entire updated suite in both modes.
+- Latest full project-prefix check (run in CI mode with `SITE_BASE_PATH=/TA-design-system`): types, lint, 7 unit tests, build, 4 artifact contracts and 41 Chromium/mobile/Firefox browser tests pass. The earlier full root-path check passed 39 browser tests; the two subsequently added forced-colour/skip-link checks have been verified at the project prefix. CI runs the entire updated suite in both modes.
 - Desktop homepage, phone homepage and phone documentation screenshots were captured; homepage screenshots were visually inspected. Keyboard focus trapping/restoration and Escape dismissal were tested automatically. No manual screen-reader review is claimed.
 - WebKit libraries are missing locally. The owner explicitly chose WebKit verification in CI rather than installing system libraries. Local WebKit is not claimed to pass.
 - A combined check invocation exceeded the harness timeout during machine contention; the built artifact's browser suite passed when run separately. No test failure was hidden or converted into success.
@@ -25,8 +25,10 @@ Implemented routes: homepage, component catalogue and four proposal pages, Found
 ```bash
 pnpm install --frozen-lockfile
 pnpm exec playwright install --with-deps chromium firefox webkit
-SITE_BASE_PATH=/TA-design-system pnpm check
+pnpm check
 ```
+
+No `SITE_BASE_PATH` is needed locally; builds, `pnpm serve:export` and browser tests default to the site root. CI sets `SITE_BASE_PATH=/TA-design-system` for the deployed GitHub Pages artifact only.
 
 For the approved local browser scope, set `PLAYWRIGHT_PROJECTS=chromium,mobile,firefox`. CI must leave this unset and run all engines.
 
