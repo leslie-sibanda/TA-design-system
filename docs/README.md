@@ -4,10 +4,13 @@ This directory records the product, architecture, security, and delivery decisio
 
 ## Start here
 
+- [Approved site design and current status](./design/site-design-status.md)
+- [Brand assets and provenance](./design/assets/README.md)
 - [Master plan](./agent-ready-design-system-plan.md)
 - [Architecture overview](./architecture/overview.md)
 - [Repository boundaries](./architecture/repository-boundaries.md)
 - [Documentation-site architecture](./architecture/documentation-site.md)
+- [Component Markdown and agent access](./architecture/component-markdown.md)
 - [Component taxonomy](./domain/component-taxonomy.md)
 - [Theme model](./domain/theme-model.md)
 - [Digital brand language](./domain/brand-language.md)
@@ -18,6 +21,7 @@ This directory records the product, architecture, security, and delivery decisio
 - [ADR-0002: Canonical source and dual distribution](./adr/ADR-0002-canonical-source-and-dual-distribution.md)
 - [ADR-0003: Semantic tokens and multi-app theming](./adr/ADR-0003-semantic-tokens-and-multi-app-theming.md)
 - [ADR-0004: MCP and WebMCP agent access](./adr/ADR-0004-agent-access.md)
+- [ADR-0005: WebMCP component documentation](./adr/ADR-0005-webmcp-component-documentation.md)
 
 ## Proposed implementation contracts
 

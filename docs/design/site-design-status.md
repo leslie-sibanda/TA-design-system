@@ -1,0 +1,117 @@
+# Approved site design and implementation status
+
+- **Recorded:** 2026-09-23
+- **Design status:** Accepted visual direction following interactive review
+- **Implementation status:** HTML prototype only; Next.js scaffolding has not started
+
+This record captures the agreed documentation-site design and the remaining implementation work. It supplements the [master plan](../agent-ready-design-system-plan.md) and [documentation-site architecture](../architecture/documentation-site.md). Design approval does not approve an unimplemented component API or waive release checks.
+
+## Audience and structure
+
+The primary audience is design and system owners. The site is a documentation portal, not a governance dashboard or marketing showcase. Engineers and agents must also be able to discover components, understand their contracts and retrieve examples.
+
+Use neobrutalism.dev as a navigation and page-structure reference, and shadcn/Fumadocs as documentation-layout references. Do not adopt neobrutalist styling or replace the TeacherActive identity.
+
+The agreed page structure is:
+
+| Surface | Decision |
+| --- | --- |
+| Homepage, intended `/` | Standalone page without a documentation sidebar or portal-card grid |
+| Top navigation | Icon-only TeacherActive logo linking home, Components, Pages and search |
+| Homepage content | Large full TeacherActive wordmark above the headline, short introduction and two calls to action |
+| Components, intended `/components` | Catalogue with links to component detail pages |
+| Component sidebar | Components heading, All components link and a flat alphabetical component list; no Actions/Forms/Navigation/Feedback subheadings |
+| Pages, intended `/pages` | Page examples and templates, separate from the component catalogue |
+| Other documentation | Getting started, foundations, themes, theme laboratory, registry/installation and contributing |
+
+The prototype uses hash navigation, not production routes. Category labels in the catalogue can remain; the request to remove them applies to sidebar grouping.
+
+## Visual decisions
+
+Keep the site calm and predominantly white, with blue headings, neutral body text, restrained borders and limited decoration. Keep the approved homepage plain; do not add dashboards, floating-card grids or decorative brand shapes without another review.
+
+Use these verified guide values and supplied assets:
+
+- TA Blue: `#005292`
+- TA Orange: `#F57D00`
+- Arial body typography; Arial Bold / Arial Black heading direction, adapted to readable UI sizes rather than copied presentation point sizes
+- Full wordmark: `assets/teacheractive-logo.png`, used prominently on the homepage
+- Symbol-only icon: `assets/teacheractive-icon.png`, used in the navbar
+
+Asset provenance, dimensions and limitations are recorded in the [asset inventory](./assets/README.md). The Canva icon replaced the manually extracted icon. The earlier screenshot wordmark is superseded by the supplied transparent wordmark. Do not stretch, recolour or recreate either logo.
+
+The selected sidebar item uses a soft background without the solid blue inset stripe. The approved preview uses white text on the original orange button background, including hover; the darker orange proposal was rejected.
+
+### Unresolved contrast issue
+
+White text on `#F57D00` has approximately **2.69:1** contrast. This fails WCAG AA for both normal text (4.5:1) and large text (3:1). The visual preference is recorded, but it is not a production accessibility exception.
+
+The design owner must review a compliant foreground/background treatment before release. Keep the issue visible in documentation and agent output until resolved. Do not silently darken the brand orange or claim the current button meets the repository accessibility standard.
+
+## Component page layout
+
+The current catalogue contains Alert, Button, Input and Tabs. Each has a detail page and links from the catalogue, desktop sidebar, mobile navigation and preview search.
+
+Component pages use this hierarchy:
+
+1. Name, purpose and lifecycle status
+2. Overview with a visual example
+3. Example source directly beneath the example, following the approved Button layout
+4. Usage guidance
+5. States and accessibility
+6. Reference, including API documentation and View Markdown / Copy Markdown actions
+7. Installation guidance
+
+Button currently demonstrates code beneath its preview. Input, Tabs and Alert have guidance and state tables, but their source-example panels still need to follow that pattern. The previews are not implementations of the canonical shared components. Tabs explicitly shows static anatomy rather than functional tab behaviour.
+
+### Proposed Button API
+
+The accepted table layout has Prop, Type and Default columns. The displayed API remains proposed until implemented and validated against Base UI and the component-authoring standard.
+
+| Prop | Proposed values | Default |
+| --- | --- | --- |
+| `variant` | `default`, `outline`, `ghost`, `destructive`, `secondary`, `link` | `default` |
+| `size` | `default`, `xs`, `sm`, `lg`, `icon`, `icon-xs`, `icon-sm`, `icon-lg` | `default` |
+
+A link-styled Button still performs an action; navigation uses an actual link. Icon-only buttons need an accessible name. Resolve the relationship between this proposed `variant` API and the repository's semantic variant guidance before freezing exports.
+
+## Responsive direction
+
+Use one responsive design, not separate mobile and desktop applications. Preserve the approved desktop layout while adapting spacing and navigation:
+
+- Compact phone header with icon, search and menu button
+- Modal side navigation with close control, Escape dismissal and focus management
+- Proportional homepage logo and responsive headline sizes
+- Stacked, full-width homepage actions on phones
+- Larger touch targets and single-column content at narrow widths
+- Horizontally scrollable code and tables without widening the whole page
+- Narrower sidebar and content spacing on tablets
+
+The prototype switches to phone navigation at 760 CSS pixels and adjusts tablet layout through 1100 pixels. These are current design values, not immutable device categories. Test intermediate widths, text scaling, keyboard focus, reduced motion and forced colours during implementation.
+
+## Markdown and agent access
+
+Every component exposes View Markdown and Copy Markdown in its Reference section, not beside the page title. Markdown should include the same usage guidance, examples, API tables, status and limitations as the human documentation.
+
+The prototype derives Markdown from displayed HTML and opens a dialog. Production will generate it from canonical documentation and metadata, with public `.md` URLs and read-only agent records. See the [Markdown contract](../architecture/component-markdown.md) and [WebMCP ADR](../adr/ADR-0005-webmcp-component-documentation.md).
+
+## Prototype and verification state
+
+The latest reviewed artifact, `visual-design-v11.html`, is preserved as [`preview/index.html`](./preview/index.html), with relative links to the supplied assets. Follow the [preview instructions](./preview/README.md) to serve it independently of the companion. This snapshot is design material, not canonical application source; this document is the durable decision record.
+
+The working companion session is under `.superpowers/brainstorm/595704-1790147787/`. Local sessions contain tokens and runtime state and are excluded from Git.
+
+A Superpowers visual-companion server serves the preview on localhost port 60141. It requires a session URL and stops after inactivity. Session keys and local browser links are not stable documentation URLs. Restarting the companion may create a new session directory; copy the latest HTML and assets when necessary.
+
+Completed checks were limited to JavaScript syntax, selected template rendering, served-content checks and selected colour contrast calculations. The visual direction was reviewed interactively. Full browser automation, device testing, screen-reader checks and repository release verification have not run.
+
+No Next.js/Fumadocs application, package API, registry endpoint, Markdown HTTP endpoint, MCP server or WebMCP registration has been implemented. Catalogue categories and several page examples are illustrative. Search filters a short preview link list, not a complete production index. Clipboard behaviour still needs browser verification.
+
+## Next implementation steps
+
+1. Resolve the button contrast issue and confirm component API conventions.
+2. Write and review a scaffolding plan and acceptance contract based on this design.
+3. Scaffold Next.js/Fumadocs and canonical package boundaries; do not transplant the monolithic prototype as application architecture.
+4. Implement shared tokens, components, responsive documentation pages and source examples.
+5. Generate Markdown and agent records, then add read-only MCP and progressively enhanced WebMCP adapters.
+6. Run the required type, unit, accessibility, contract, registry, build and browser checks before release.

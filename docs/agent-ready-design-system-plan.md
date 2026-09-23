@@ -9,7 +9,7 @@ The site will support two agent integration layers:
 - **WebMCP:** browser agents can discover and use tools while viewing the site.
 - **MCP server:** external agents can read component source, documentation, registry metadata, tokens, and examples directly from the repository.
 
-The implementation remains greenfield; the repository currently contains planning and local MCP scaffolding but no application or component framework that must be preserved.
+The implementation remains greenfield. The repository contains architecture records, brand assets and an approved HTML design prototype, but no scaffolded Next.js app, canonical component implementation or working MCP/WebMCP service. See the [approved design and current status](./design/site-design-status.md) before implementation.
 
 ## Core architecture
 
@@ -275,7 +275,7 @@ Translate the supplied 2025 TeacherActive brand guide into a digital interface s
 - Icons use the approved blue/orange treatment and consistent optical size. Generic icon libraries may provide geometry only when the result matches the brand icon rules.
 - Photography and illustration follow the brand guide's education, people, diversity, and candid-workplace direction. Decorative assets remain separate from functional icons.
 
-Exact colour values, fonts, logo clear-space rules, and asset usage must be transcribed from source-quality brand files before implementation; the supplied screenshots define direction but are not precise enough to sample production tokens.
+Readable labels in the supplied screenshots confirm TA Blue `#005292`, TA Orange `#F57D00` and the Arial typography direction. Do not sample rendered pixels to derive production tokens. Remaining palette details and clear-space rules still need verification. Supplied raster logos and provenance are recorded in the [asset inventory](./design/assets/README.md); use approved vector originals when available. The [design status](./design/site-design-status.md) records the unresolved white-on-orange contrast issue.
 
 ### Token model
 
@@ -345,11 +345,13 @@ Workspace/npm packages provide controlled upgrades across known TeacherActive ap
 
 ## Documentation experience
 
-Build a shadcn-style site with:
+Build a shadcn/Fumadocs-style documentation site following the [approved design](./design/site-design-status.md):
 
-- A left documentation sidebar grouped by Foundations, Components, Patterns, Templates, and Utilities.
+- A plain standalone homepage without a sidebar, with the full TeacherActive wordmark and two primary entry links.
+- Top navigation with the icon-only logo, Components, Pages and search.
+- A documentation sidebar with a flat alphabetical component list beneath Components; do not add component category subheadings.
 - Search with keyboard shortcut support.
-- Component pages containing purpose, usage guidance, live preview, installation command, source code, API/reference information, accessibility notes, variants, states, responsive examples, and related components.
+- Component pages containing purpose, usage guidance, live preview, installation command, source code, API/reference information, accessibility notes, variants, states, responsive examples, and related components. Place example code beneath the Overview preview and Markdown actions in Reference.
 - Theme controls for light/dark mode if required by the TeacherActive brand.
 - Copy buttons for imports, CLI commands, and source examples.
 - A component index and searchable registry catalogue.
@@ -422,6 +424,7 @@ Recommended MCP tools:
 
 - `search_components(query, category?)`
 - `get_component(name)`
+- `get_component_docs(id)` using the shared documentation record in ADR-0005
 - `get_component_source(name)`
 - `get_component_example(name, variant?)`
 - `get_install_command(name, packageManager?)`
@@ -443,7 +446,7 @@ This MCP server gives coding agents repository-level access. WebMCP alone is ins
 
 ## WebMCP browser integration
 
-Add a WebMCP adapter to the documentation site, using feature detection so the site works normally in browsers without WebMCP.
+Add a WebMCP adapter to the documentation site, using feature detection so the site works normally in browsers without WebMCP. [ADR-0005](./adr/ADR-0005-webmcp-component-documentation.md) defines shared read-only component documentation retrieval, public Markdown fallbacks and the distinction from external MCP. Exact registration APIs must be verified during implementation.
 
 Expose browser tools such as:
 
@@ -470,6 +473,7 @@ Add:
 - `llms.txt` for a concise site map and usage instructions.
 - `llms-full.txt` or an equivalent generated reference for the full component catalogue.
 - Stable URLs for every component and token.
+- Per-component Markdown URLs generated from canonical documentation and metadata, with View Markdown and Copy Markdown in each component's Reference section. See the [Markdown contract](./architecture/component-markdown.md).
 - Machine-readable JSON endpoints for component metadata and registry items.
 - Clear page titles, descriptions, headings, and semantic form controls.
 - Examples that include complete imports and dependency requirements.

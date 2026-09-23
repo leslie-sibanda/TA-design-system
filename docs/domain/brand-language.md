@@ -2,7 +2,9 @@
 
 ## Source
 
-This direction is derived from the supplied TeacherActive 2025 brand-guideline screenshots. Exact production values must be confirmed from source-quality brand files before token implementation.
+This direction is derived from the supplied TeacherActive 2025 brand-guideline screenshots. Full-resolution crops contain readable palette and typography specifications: TA Blue `#005292`, TA Orange `#F57D00`, Arial body text and Arial Black / Arial Bold headings. These values were transcribed from labels, not sampled from screenshot pixels.
+
+The supplied transparent wordmark and Canva symbol are stored with provenance in the [asset inventory](../design/assets/README.md). They are raster assets, not vector masters. Obtain approved vector originals when available and verify remaining palette values before adding tokens.
 
 ## Visual character
 
@@ -18,9 +20,11 @@ TeacherActive interfaces should feel confident, direct, energetic, supportive, a
 
 Colour combinations must follow approved pairings. Blue and orange should not be blended into muddy gradients or used with insufficient contrast.
 
+The accepted visual preview uses white button text on TA Orange at the design owner's request. This pairing measures approximately 2.69:1 and fails AA text contrast. It remains a [documented release blocker](../design/site-design-status.md#unresolved-contrast-issue), not an exception to the accessibility standard.
+
 ## Typography
 
-- Use the approved brand families and weights when licensed font files are available.
+- Follow the guide's Arial family direction, with documented system fallbacks. Do not bundle proprietary font files without a licence.
 - Use bold, compact headings with clear level changes.
 - Orange subheadings may reinforce hierarchy, while body content remains quieter and highly readable.
 - Product UI uses a restrained type scale; campaign-scale typography is reserved for marketing or brand moments.
