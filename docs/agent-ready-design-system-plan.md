@@ -7,9 +7,15 @@ Create a Next.js documentation site using Fumadocs, a TeacherActive-owned compon
 The site will support two agent integration layers:
 
 - **WebMCP:** browser agents can discover and use tools while viewing the site.
-- **MCP server:** external agents can read component source, documentation, registry metadata, tokens, and examples directly from the repository.
+- **Static agent documentation:** agents with HTTP access can retrieve public component Markdown, `llms.txt` and approved metadata. [ADR-0007](./adr/ADR-0007-static-agent-access-without-external-mcp.md) defers the external MCP server.
 
 The implementation remains greenfield. The repository contains architecture records, brand assets and an approved HTML design prototype, but no scaffolded Next.js app, canonical component implementation or working MCP/WebMCP service. See the [approved design and current status](./design/site-design-status.md) before implementation.
+
+## Hosting and delivery decision
+
+[ADR-0006](./adr/ADR-0006-github-pages-static-deployment.md) selects GitHub Pages. Build Next.js with static export, enumerate all public routes at build time and use client-side search over a generated index. All public asset and data URLs must respect the project base path. Route-handler examples below describe output contracts, not permission to require a runtime server; Markdown, registry and agent-discovery records must be emitted as static files.
+
+Use the installed frontend skills and TDD. GitHub Actions verifies pull requests and deploys only the tested static artifact from main. No external MCP server is required in the initial scope; browser WebMCP remains progressive enhancement over static agent documentation. No CI workflow or deployed application exists yet.
 
 ## Core architecture
 
@@ -30,7 +36,7 @@ The implementation remains greenfield. The repository contains architecture reco
   ├── AGENTS.md                         # Tool-neutral repository instructions
   ├── CLAUDE.md                         # Brief Claude-specific entry point
   ├── SECURITY.md                       # Reporting and security boundaries
-  ├── .mcp.json                         # Shared MCP server definitions
+  ├── .mcp.json                         # Deferred; do not create in initial scope
   ├── package.json
   ├── pnpm-lock.yaml
   ├── pnpm-workspace.yaml
@@ -174,7 +180,7 @@ The implementation remains greenfield. The repository contains architecture reco
   ├── src/
   │   ├── app/                          # Next.js App Router routes
   │   │   ├── (docs)/
-  │   │   ├── api/search/
+  │   │   ├── api/search/             # Build-time static index; no request-time search
   │   │   ├── r/[name]/route.ts         # Registry item JSON endpoints
   │   │   ├── llms.txt/route.ts
   │   │   └── llms-full.txt/route.ts
@@ -187,7 +193,7 @@ The implementation remains greenfield. The repository contains architecture reco
   │   │   └── webmcp/                   # Feature detection and browser tools
   │   └── types/
   │
-  ├── mcp/
+  ├── mcp/                             # Deferred architecture; do not scaffold initially
   │   ├── src/
   │   │   ├── server.ts                 # MCP server entry point
   │   │   ├── resources/                # Read-only resource handlers
@@ -202,7 +208,7 @@ The implementation remains greenfield. The repository contains architecture reco
   │   │   ├── component-quality.yaml
   │   │   ├── documentation-grounding.yaml
   │   │   ├── registry-installation.yaml
-  │   │   ├── mcp-retrieval.yaml
+  │   │   ├── static-agent-retrieval.yaml
   │   │   └── safety.yaml
   │   ├── tasks/                        # Inputs and expected outcomes
   │   ├── graders/                      # Deterministic and model-based graders
@@ -213,7 +219,7 @@ The implementation remains greenfield. The repository contains architecture reco
   ├── tests/
   │   ├── unit/
   │   ├── integration/
-  │   ├── contract/                     # Registry, MCP, and route contracts
+  │   ├── contract/                     # Registry, WebMCP, and static route contracts
   │   ├── accessibility/
   │   └── security/
   ├── e2e/                              # Browser and WebMCP journeys
@@ -251,7 +257,7 @@ The implementation remains greenfield. The repository contains architecture reco
 - `.agents/skills/` contains canonical tool-neutral workflows. Claude-specific skills remain short adapters that point to the canonical process instead of maintaining a second implementation.
 - `delivery/` records planned and completed work. Every implementation starts from a sprint brief and acceptance contract and ends with review findings and a current handoff.
 - `evals/` measures whether agents can correctly discover, explain, install, and use components. It does not replace deterministic tests.
-- `mcp/` may read only the approved paths declared in its policy module. It cannot write to the repository in the initial release.
+- `mcp/` and `.mcp.json` are deferred; do not scaffold them. Initial agents read approved static records through HTTP or feature-detected WebMCP.
 
 ## Design foundation and multi-app theming
 
@@ -361,7 +367,7 @@ Each custom component should have a matching documentation page and registry ite
 
 Add a theme laboratory that switches between registered application themes and exposes colour, typography, spacing, radius, elevation, density, motion, focus, and component states. Changes made in the laboratory should export a reviewable token proposal rather than mutate production themes directly.
 
-Use a typed component manifest to generate the component catalogue, documentation navigation, package exports, registry metadata, MCP records, status badges, and provenance details. Add stable `data-slot` markers to public component parts for styling, testing, debugging, and agent inspection.
+Use a typed component manifest to generate the component catalogue, documentation navigation, package exports, registry metadata, public agent records, status badges, and provenance details. Add stable `data-slot` markers to public component parts for styling, testing, debugging, and agent inspection.
 
 ## shadcn registry
 
@@ -396,53 +402,11 @@ Use the official registry format:
 
 The registry may also be consumed directly from the GitHub repository during development.
 
-## MCP file access
+## Static agent access
 
-Provide a separate read-only MCP server for external agents. It should expose scoped resources and search tools for:
+Generate public component Markdown, discovery files and approved metadata at build time from canonical content. Agents with ordinary HTTP access can retrieve these without an open browser tab. Browser agents may use WebMCP while the site is open.
 
-- Component source files
-- Component documentation
-- Registry item metadata
-- Examples and preview data
-- Design tokens
-- Icons and asset metadata
-- Contribution and usage guidelines
-- The registry catalog
-
-Recommended MCP resources:
-
-- `ta://components`
-- `ta://components/{name}`
-- `ta://components/{name}/source`
-- `ta://components/{name}/docs`
-- `ta://components/{name}/examples`
-- `ta://tokens`
-- `ta://registry`
-- `ta://guidelines`
-
-Recommended MCP tools:
-
-- `search_components(query, category?)`
-- `get_component(name)`
-- `get_component_docs(id)` using the shared documentation record in ADR-0005
-- `get_component_source(name)`
-- `get_component_example(name, variant?)`
-- `get_install_command(name, packageManager?)`
-- `search_docs(query)`
-- `list_tokens(category?)`
-- `validate_registry_item(name?)`
-
-The MCP server must:
-
-- Restrict file reads to approved repository directories.
-- Reject path traversal and arbitrary filesystem paths.
-- Default to read-only access.
-- Return structured metadata alongside source text.
-- Omit secrets, environment files, build output, and private workspace files.
-- Support local stdio transport first.
-- Leave room for authenticated Streamable HTTP transport later.
-
-This MCP server gives coding agents repository-level access. WebMCP alone is insufficient for this purpose because browser WebMCP tools are bound to the open tab and are ephemeral. MCP and WebMCP should therefore be used together.
+This is not an MCP transport. Agents that require an external MCP server are outside the initial integration scope. Do not build stdio or HTTP MCP transports, server packages or server-specific tests. Reconsider only for a concrete consuming-agent need under a new decision, as recorded in [ADR-0007](./adr/ADR-0007-static-agent-access-without-external-mcp.md).
 
 ## WebMCP browser integration
 
@@ -462,7 +426,7 @@ Expose browser tools such as:
 
 Tools should return structured JSON and deep links into the documentation site. They should not expose arbitrary file reads or unrestricted code execution.
 
-Read-only tools should be available automatically. Any future action that changes repository or registry state should require explicit user confirmation and should be exposed through the external MCP server rather than directly through the browser page.
+Expose approved read-only tools where browser support exists. Retrieval must not have hidden navigation, clipboard or write side effects. Any future state-changing capability requires a separate architecture and security decision; do not assume an external server will be built.
 
 WebMCP is an emerging browser standard, so the implementation should be progressive and non-blocking. The site must remain fully usable when WebMCP is unavailable.
 
@@ -500,8 +464,8 @@ The repository instructions must define precedence clearly: the user request com
 - Every registry item passes shadcn registry validation.
 - The shared `scripts/check` command reproduces all required local verification without agent-specific commands.
 - Every documented component has a working preview, source example, valid install command, and complete registry metadata.
-- MCP Inspector can list resources and call every read-only tool.
-- MCP attempts to read outside approved directories are rejected.
+- Agents can retrieve published Markdown and discovery files through HTTP without browser WebMCP support.
+- WebMCP accepts only approved record IDs and rejects arbitrary path/URL retrieval.
 - WebMCP tools are discoverable in a WebMCP-capable Chrome environment.
 - The site remains usable when WebMCP is unavailable.
 - Search returns both documentation pages and component registry items.

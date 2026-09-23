@@ -120,11 +120,17 @@ Completed checks were limited to JavaScript syntax, selected template rendering,
 
 No Next.js/Fumadocs application, package API, registry endpoint, Markdown HTTP endpoint, MCP server or WebMCP registration has been implemented. Catalogue categories and several page examples are illustrative. Search filters a short preview link list, not a complete production index. Clipboard behaviour still needs browser verification.
 
+## Delivery requirements
+
+Deploy the real site to GitHub Pages as a Next.js static export, as specified in [ADR-0006](../adr/ADR-0006-github-pages-static-deployment.md). Use the installed frontend skills, test-driven implementation and automated GitHub Actions verification/deployment. Static search and base-path handling are required. [ADR-0007](../adr/ADR-0007-static-agent-access-without-external-mcp.md) defers the external MCP server entirely; initial access is browser WebMCP plus public Markdown and `llms.txt`.
+
+The [scaffold plan](../superpowers/plans/2026-09-23-nextjs-site-scaffold.md) includes these requirements. No application workflow or Pages deployment has been created yet.
+
 ## Next implementation steps
 
 1. Resolve the button contrast issue and confirm component API conventions.
 2. Write and review a scaffolding plan and acceptance contract based on this design.
 3. Scaffold Next.js/Fumadocs and canonical package boundaries; do not transplant the monolithic prototype as application architecture.
 4. Implement shared tokens, components, responsive documentation pages and source examples.
-5. Generate Markdown and agent records, then add read-only MCP and progressively enhanced WebMCP adapters.
+5. Generate static Markdown and discovery records, then add progressively enhanced read-only WebMCP tools. Do not build an external MCP server in the initial scope.
 6. Run the required type, unit, accessibility, contract, registry, build and browser checks before release.
