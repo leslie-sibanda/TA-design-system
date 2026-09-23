@@ -15,7 +15,7 @@ Implemented routes: homepage, component catalogue and four proposal pages, Found
 - Local tests use one browser worker to reduce contention with other development processes.
 - Observed failing tests before implementing path validation, export serving, homepage identity, route navigation and static search behaviour.
 - Responsive tests exposed low syntax-highlight contrast caused by a changed code background, a nested unfocusable scroll area and unbroken heading overflow. Preserving the highlighter's white background, keeping one focusable code viewport and wrapping headings resolved these without suppressing axe rules.
-- Latest local verification: types, lint, 4 unit tests, build, 2 artifact contracts and 39 Chromium/mobile/Firefox browser tests pass for `/TA-design-system`.
+- Latest full project-prefix check: types, lint, 7 unit tests, build, 4 artifact contracts and 41 Chromium/mobile/Firefox browser tests pass. The earlier full root-path check passed 39 browser tests; the two subsequently added forced-colour/skip-link checks have been verified at the project prefix. CI runs the entire updated suite in both modes.
 - Desktop homepage, phone homepage and phone documentation screenshots were captured; homepage screenshots were visually inspected. Keyboard focus trapping/restoration and Escape dismissal were tested automatically. No manual screen-reader review is claimed.
 - WebKit libraries are missing locally. The owner explicitly chose WebKit verification in CI rather than installing system libraries. Local WebKit is not claimed to pass.
 - A combined check invocation exceeded the harness timeout during machine contention; the built artifact's browser suite passed when run separately. No test failure was hidden or converted into success.
@@ -37,9 +37,12 @@ Apply the implementation commits in order on top of the design/ADR baseline:
 1. `708df5a` — static scaffold, path/server tests and verification commands
 2. `6ab28aa` — accessible brand tokens, homepage and navigation
 3. `29076bd` — static documentation routes and searchable proposals
+4. `b51b593` — responsive verification and accessible code blocks
 
-Subsequent commits add responsive verification and the Pages pipeline. Use Git history for their hashes; do not squash if individual replay is required. These commits have not been pushed or merged into main.
+Later commits add forced-colour/export checks and the reusable Pages pipeline. Use Git history for their hashes; do not squash if individual replay is required. These commits have not been pushed or merged into main.
 
 ## Next
 
-Implement and test the GitHub Actions verification/deployment workflow. Validate the export in both root and repository-prefix modes. Repository Pages settings, environment restrictions, required checks and an actual CI/deployment run require owner setup/permission and have not been performed.
+The owner chose `workflow_call` reusable workflows rather than local composite actions. `.github/workflows/pages.yml` calls `verify-site.yml` and, after successful verification on main, `deploy-site.yml`. Verification runs all browser engines against root and project-path builds. Deployment reuses the checked artifact and has no checkout/build step. External action SHAs were resolved from official upstream tags, including the peeled pnpm action tag. Workflow contract tests were observed failing before each implementation, then passing.
+
+Repository Pages settings, environment restrictions, required checks and an actual CI/deployment run require owner setup/permission and have not been performed. WebKit remains unverified until CI. Review was performed inline; no independent reviewer subagent was available in this session. Workflow contracts and YAML parsing pass, but an actual GitHub run is still required. Next product slices are canonical components, live Styling and static Markdown/WebMCP, not further scaffolding.
