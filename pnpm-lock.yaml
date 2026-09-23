@@ -8,6 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@base-ui/react':
+        specifier: ^1.8.0
+        version: 1.8.0(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@teacheractive/themes':
+        specifier: workspace:^
+        version: link:packages/themes
+      '@teacheractive/tokens':
+        specifier: workspace:^
+        version: link:packages/tokens
       cn:
         specifier: ^0.3.0
         version: 0.3.3
@@ -87,6 +96,10 @@ importers:
       yaml:
         specifier: ^2.9.1
         version: 2.9.1
+
+  packages/themes: {}
+
+  packages/tokens: {}
 
 packages:
 

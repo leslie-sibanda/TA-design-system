@@ -43,11 +43,11 @@ Asset provenance, dimensions and limitations are recorded in the [asset inventor
 
 The selected sidebar item uses a soft background without the solid blue inset stripe. The approved preview uses white text on the original orange button background, including hover; the darker orange proposal was rejected.
 
-### Unresolved contrast issue
+### Contrast decision resolved for implementation
 
 White text on `#F57D00` has approximately **2.69:1** contrast. This fails WCAG AA for both normal text (4.5:1) and large text (3:1). The visual preference is recorded, but it is not a production accessibility exception.
 
-The design owner must review a compliant foreground/background treatment before release. Keep the issue visible in documentation and agent output until resolved. Do not silently darken the brand orange or claim the current button meets the repository accessibility standard.
+On 2026-09-23, the design owner approved **brand orange with dark text** for the real application. Production uses `#182B3A` on `#F57D00`, approximately 5.43:1. The historical HTML prototype retains white labels and is not the production accessibility baseline. Automated homepage axe checks pass with the new pairing; full component and theme verification remains required.
 
 ## Component page layout
 
@@ -128,7 +128,7 @@ The [scaffold plan](../superpowers/plans/2026-09-23-nextjs-site-scaffold.md) inc
 
 ## Next implementation steps
 
-1. Resolve the button contrast issue and confirm component API conventions.
+1. Apply the approved dark action foreground and confirm component API conventions.
 2. Write and review a scaffolding plan and acceptance contract based on this design.
 3. Scaffold Next.js/Fumadocs and canonical package boundaries; do not transplant the monolithic prototype as application architecture.
 4. Implement shared tokens, components, responsive documentation pages and source examples.
