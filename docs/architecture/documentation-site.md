@@ -8,7 +8,7 @@ The documentation site is the human and agent-readable catalogue for foundations
 
 The [site design record](../design/site-design-status.md) captures the approved visual direction, responsive behaviour and implementation gaps. The current site is a local HTML prototype, not a scaffolded Next.js application.
 
-The primary audience is design and system owners. Use a plain standalone homepage without a sidebar or portal-card grid. Top navigation contains the symbol-only logo, Components, Pages and search. The homepage uses the full wordmark above its headline. Component documentation uses a flat alphabetical sidebar list without category subheadings.
+The primary audience is design and system owners. Use a plain standalone homepage without a sidebar or portal-card grid. Top navigation contains the symbol-only logo, Components, Pages, Styling and search. The homepage uses the full wordmark above its headline. Component documentation uses a flat alphabetical sidebar list without category subheadings.
 
 Pages is the top-level destination for page examples and templates. Components is a separate catalogue and documentation destination. Other documentation remains discoverable within the documentation navigation.
 
@@ -21,6 +21,8 @@ Pages is the top-level destination for page examples and templates. Components i
 - **Themes:** base TeacherActive theme, registered app themes, comparison, and theme-authoring guidance.
 - **Templates:** optional application shells and page structures.
 - **Contributing:** lifecycle, standards, testing, compatibility, and releases.
+
+Styling is a lightweight component canvas with Customize and Copy actions. Controls are initially collapsed and adjust scoped preview tokens. It is not a dashboard for theme governance. Formal app-theme registration and full theme-lab checks remain separate from draft exploration.
 
 ## Page model
 

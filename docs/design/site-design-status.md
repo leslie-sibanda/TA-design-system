@@ -17,11 +17,12 @@ The agreed page structure is:
 | Surface | Decision |
 | --- | --- |
 | Homepage, intended `/` | Standalone page without a documentation sidebar or portal-card grid |
-| Top navigation | Icon-only TeacherActive logo linking home, Components, Pages and search |
+| Top navigation | Icon-only TeacherActive logo linking home, Components, Pages, Styling and search |
 | Homepage content | Large full TeacherActive wordmark above the headline, short introduction and two calls to action |
 | Components, intended `/components` | Catalogue with links to component detail pages |
 | Component sidebar | Components heading, All components link and a flat alphabetical component list; no Actions/Forms/Navigation/Feedback subheadings |
 | Pages, intended `/pages` | Page examples and templates, separate from the component catalogue |
+| Styling, intended `/styling` | Component canvas with Customize and Copy actions; controls stay collapsed initially |
 | Other documentation | Getting started, foundations, themes, theme laboratory, registry/installation and contributing |
 
 The prototype uses hash navigation, not production routes. Category labels in the catalogue can remain; the request to remove them applies to sidebar grouping.
@@ -89,6 +90,18 @@ Use one responsive design, not separate mobile and desktop applications. Preserv
 
 The prototype switches to phone navigation at 760 CSS pixels and adjusts tablet layout through 1100 pixels. These are current design values, not immutable device categories. Test intermediate widths, text scaling, keyboard focus, reduced motion and forced colours during implementation.
 
+## Accepted Styling playground
+
+The simplified neobrutalism.dev-style workflow was accepted on 2026-09-23. Use a component canvas with Customize and Copy actions, not a persistent theme-management dashboard.
+
+Customize reveals colour presets, a custom action colour, corner shape, shadow and reset controls. All preview components respond together through scoped tokens. Documentation navigation retains the TeacherActive theme. Keep contrast warnings inside Customize and in copied CSS, rather than displaying a large checks dashboard.
+
+Copy produces draft CSS, with selectable text if clipboard access fails. Drafts remain in memory. Do not register themes, persist edits or mutate an application when experimenting. Presets are starting points, not approved app themes.
+
+The initial comparison panel, app-ID form, typography/density controls and download workflow were removed from this surface after review. Formal theme registration and exhaustive theme-lab verification remain separate engineering capabilities, not requirements for this first Styling interface.
+
+Current fixtures include actions, notifications, fields, activity, feedback, a slider and expandable content. These are prototype HTML, not released shared components. The real canvas must use canonical components and theme mappings.
+
 ## Markdown and agent access
 
 Every component exposes View Markdown and Copy Markdown in its Reference section, not beside the page title. Markdown should include the same usage guidance, examples, API tables, status and limitations as the human documentation.
@@ -97,11 +110,11 @@ The prototype derives Markdown from displayed HTML and opens a dialog. Productio
 
 ## Prototype and verification state
 
-The latest reviewed artifact, `visual-design-v11.html`, is preserved as [`preview/index.html`](./preview/index.html), with relative links to the supplied assets. Follow the [preview instructions](./preview/README.md) to serve it independently of the companion. This snapshot is design material, not canonical application source; this document is the durable decision record.
+The approved site baseline, `visual-design-v11.html`, is preserved as [`preview/index.html`](./preview/index.html), with relative links to the supplied assets. The accepted simplified Styling extension lives in `preview/styling.js` and `preview/styling.css`. Follow the [preview instructions](./preview/README.md) to serve it independently of the companion. This snapshot is design material, not canonical application source; this document is the durable decision record.
 
-The working companion session is under `.superpowers/brainstorm/595704-1790147787/`. Local sessions contain tokens and runtime state and are excluded from Git.
+Working companion sessions are under `.superpowers/brainstorm/`. Local sessions contain tokens and runtime state and are excluded from Git.
 
-A Superpowers visual-companion server serves the preview on localhost port 60141. It requires a session URL and stops after inactivity. Session keys and local browser links are not stable documentation URLs. Restarting the companion may create a new session directory; copy the latest HTML and assets when necessary.
+A Superpowers visual-companion server serves the preview on a session-specific localhost port. It requires a session URL and stops after inactivity. Session keys and local browser links are not stable documentation URLs. Restarting the companion may create a new session directory; copy the latest HTML and assets when necessary.
 
 Completed checks were limited to JavaScript syntax, selected template rendering, served-content checks and selected colour contrast calculations. The visual direction was reviewed interactively. Full browser automation, device testing, screen-reader checks and repository release verification have not run.
 
