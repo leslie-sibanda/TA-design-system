@@ -1,30 +1,17 @@
-import { llms, loader } from 'fumadocs-core/source';
-import { docsContentRoute, docsImageRoute, docsRoute } from './shared';
+import { loader } from 'fumadocs-core/source';
 import { defineDocs } from 'fumadocs-mdx/macro';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
-
-const docs = defineDocs({
-  dir: 'content/docs',
-  docs: {
-    schema: pageSchema,
-    postprocess: {
-      includeProcessedMarkdown: true,
-    },
-  },
-  meta: {
-    schema: metaSchema,
-  },
-});
-
-// See https://fumadocs.dev/docs/headless/source-api for more info
-export const source = loader({
-  baseUrl: docsRoute,
-  source: docs.toFumadocsSource(),
-  plugins: [],
-});
-
-export const docsLlms = llms(source, {
-  renderPage: async (page) => `# ${page.data.title} (${page.url})
-
-${await page.data.getText('processed')}`,
-});
+const docs = defineDocs({ dir: 'content/docs', docs: { schema: pageSchema }, meta: { schema: metaSchema } });
+export const source = loader({ baseUrl: '/', source: docs.toFumadocsSource() });
+export function componentPages() {
+  return source.getPages().filter(page => page.slugs[0] === 'components' && page.slugs.length === 2)
+    .sort((a, b) => a.data.title.localeCompare(b.data.title));
+}
+export function documentationLinks() {
+  return [
+    { href: '/components/', label: 'All components' },
+    ...componentPages().map(page => ({ href: page.url + '/', label: page.data.title })),
+    { href: '/foundations/', label: 'Foundations' },
+    { href: '/contributing/', label: 'Contributing' },
+  ];
+}

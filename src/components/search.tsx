@@ -13,12 +13,14 @@ import {
 import { useDocsSearch } from 'fumadocs-core/search/client';
 import { staticClient } from 'fumadocs-core/search/client/orama-static';
 import { useI18n } from 'fumadocs-ui/contexts/i18n';
+import { publicPath } from '@/lib/site-path.mjs';
 
 export default function DefaultSearchDialog(props: SharedProps) {
   const { locale } = useI18n(); // (optional) for i18n
   const { search, setSearch, query } = useDocsSearch({
     client: staticClient({
       locale,
+      from: publicPath('/api/search', process.env.NEXT_PUBLIC_SITE_BASE_PATH ?? ''),
     }),
   });
 
@@ -31,7 +33,7 @@ export default function DefaultSearchDialog(props: SharedProps) {
           <SearchDialogInput />
           <SearchDialogClose />
         </SearchDialogHeader>
-        <SearchDialogList items={query.data !== 'empty' ? query.data : null} />
+        {query.error ? <p role="alert" className="search-error">Search is unavailable. Close this dialog and use the documentation navigation.</p> : <SearchDialogList items={query.data !== 'empty' ? query.data : null} />}
       </SearchDialogContent>
     </SearchDialog>
   );

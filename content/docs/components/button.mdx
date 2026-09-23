@@ -1,0 +1,44 @@
+---
+title: Button
+description: Trigger an action or move a task forward. Use a link for navigation.
+---
+
+**Design proposal · Not released**
+
+## Overview
+
+The canonical Button implementation is not available yet. This source example illustrates the proposed import and API, not an installable package.
+
+```tsx
+import { Button } from '@teacheractive/ui/button';
+
+<Button>Save changes</Button>;
+```
+
+## Usage guidance
+
+Keep one dominant action per form or dialog. Name the outcome, such as “Save changes”, rather than “Submit”. Use secondary emphasis for alternatives and explicit wording for destructive actions.
+
+## States and accessibility
+
+| State | Requirement |
+| --- | --- |
+| Focus | Keep a visible focus indicator in every theme. |
+| Loading | Announce progress and prevent repeated actions. |
+| Disabled | Explain why an action is unavailable where needed. |
+| Icon only | Provide an accessible name. |
+
+The production shell uses dark text on brand orange, as approved during implementation. White text on this orange fails contrast requirements.
+
+## API Reference
+
+### Button
+
+Proposed API only; validate against Base UI before implementing or publishing.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "ghost" \| "destructive" \| "secondary" \| "link"` | `"default"` |
+| `size` | `"default" \| "xs" \| "sm" \| "lg" \| "icon" \| "icon-xs" \| "icon-sm" \| "icon-lg"` | `"default"` |
+
+Markdown export and installation commands will appear here once their implementations are verified. A link-styled button still performs an action; use an actual link for a destination.
