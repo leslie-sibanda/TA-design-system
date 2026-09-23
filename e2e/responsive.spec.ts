@@ -29,6 +29,16 @@ test('mobile menu traps focus, closes with Escape, restores focus and navigates'
   await expect(page).toHaveURL(/\/components\/input\/$/);
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
+test('skip navigation remains keyboard-visible in forced colours', async ({ page }) => {
+  await page.emulateMedia({ forcedColors: 'active' });
+  await page.goto(`${base}/`);
+  await page.keyboard.press('Tab');
+  const skip = page.getByRole('link', { name: 'Skip to content' });
+  await expect(skip).toBeFocused();
+  await expect(skip).toBeInViewport();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('main')).toBeFocused();
+});
 test('search keyboard shortcut and Escape restore trigger focus', async ({ page }) => {
   await page.goto(`${base}/`);
   const trigger = page.getByRole('button', { name: /^Search/ });
@@ -57,6 +67,8 @@ test('long content, enlarged text and reduced motion do not widen the document',
     document.querySelector('h1')!.textContent = 'ComponentWithAnExceptionallyLongUnbrokenHeadingForReflow';
     const code = document.querySelector('pre code');
     if (code) code.textContent = 'A'.repeat(400);
+    const cell = document.querySelector('td');
+    if (cell) cell.textContent = 'VeryLongUnbrokenTableValue'.repeat(20);
   });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
