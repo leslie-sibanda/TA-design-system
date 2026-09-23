@@ -1,7 +1,9 @@
 # ADR-0004: Provide MCP and WebMCP Agent Access
 
-- **Status:** Accepted
+- **Status:** Partially superseded by [ADR-0007](./ADR-0007-static-agent-access-without-external-mcp.md); external MCP is deferred
 - **Date:** 2026-09-21
+
+The initial release now uses WebMCP and public static documentation only. The external-server requirements below are retained as decision history, not current delivery scope.
 
 ## Context
 

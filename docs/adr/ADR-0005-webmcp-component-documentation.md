@@ -1,8 +1,10 @@
 # ADR-0005: Expose canonical component documentation through progressive WebMCP
 
-- **Status:** Accepted
+- **Status:** Accepted; external-MCP scope partially superseded by [ADR-0007](./ADR-0007-static-agent-access-without-external-mcp.md)
 - **Date:** 2026-09-23
 - **Extends:** [ADR-0004: MCP and WebMCP agent access](./ADR-0004-agent-access.md)
+
+The shared-record, public-Markdown and progressive-WebMCP decisions remain current. References below to an external server describe the earlier proposal; that server is deferred.
 
 ## Context
 

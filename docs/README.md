@@ -22,6 +22,8 @@ This directory records the product, architecture, security, and delivery decisio
 - [ADR-0003: Semantic tokens and multi-app theming](./adr/ADR-0003-semantic-tokens-and-multi-app-theming.md)
 - [ADR-0004: MCP and WebMCP agent access](./adr/ADR-0004-agent-access.md)
 - [ADR-0005: WebMCP component documentation](./adr/ADR-0005-webmcp-component-documentation.md)
+- [ADR-0006: GitHub Pages static deployment](./adr/ADR-0006-github-pages-static-deployment.md)
+- [ADR-0007: WebMCP and static documentation; defer external MCP](./adr/ADR-0007-static-agent-access-without-external-mcp.md)
 
 ## Proposed implementation contracts
 
