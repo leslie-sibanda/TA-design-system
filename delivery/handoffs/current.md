@@ -10,7 +10,7 @@ Implemented routes: homepage, component catalogue and four proposal pages, Found
 
 ## Decisions and verification
 
-- The owner approved dark `#182B3A` text on the original `#F57D00` orange for the app. Historical previews retain the earlier white-text proposal.
+- DEV-5: the requester asked for white text on all orange buttons, following the approved preview. `--action-foreground` is now white on the design-system site (about 2.69:1, a recorded exception that supersedes the 2026-09-23 dark-text decision). Design-owner sign-off is required before merge. The TeacherActive app is out of scope here and needs its own follow-up.
 - The browser test server uses port 4173 because another local service occupies 3000.
 - Local tests use one browser worker to reduce contention with other development processes.
 - Observed failing tests before implementing path validation, export serving, homepage identity, route navigation and static search behaviour.

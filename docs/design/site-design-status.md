@@ -45,9 +45,17 @@ The selected sidebar item uses a soft background without the solid blue inset st
 
 ### Contrast decision resolved for implementation
 
-White text on `#F57D00` has approximately **2.69:1** contrast. This fails WCAG AA for both normal text (4.5:1) and large text (3:1). The visual preference is recorded, but it is not a production accessibility exception.
+White text on `#F57D00` has approximately **2.69:1** contrast. This fails WCAG AA for both normal text (4.5:1) and large text (3:1). On 2026-09-23, the design owner approved **brand orange with dark text** (`#182B3A`, approximately 5.43:1). DEV-5 then asked for white text on every orange button, following the historical preview, and the darker-orange alternative was rejected earlier in review.
 
-On 2026-09-23, the design owner approved **brand orange with dark text** for the real application. Production uses `#182B3A` on `#F57D00`, approximately 5.43:1. The historical HTML prototype retains white labels and is not the production accessibility baseline. Automated homepage axe checks pass with the new pairing; full component and theme verification remains required.
+Recorded exception (DEV-5, pending design-owner sign-off before merge):
+
+- Scope: orange action buttons on the design-system site, through `--action-foreground` (`#FFFFFF`) in `packages/tokens/src/semantic.css` and `packages/themes/src/teacheractive.css`.
+- Owner: design owner (sign-off required); requested by leslie.sibanda.
+- Impact: label contrast is about 2.69:1, below AA. Low-vision users may struggle to read orange button labels.
+- Workaround: buttons keep a visible 3px blue focus ring, a bold label and a 44px minimum target. Reverting means setting `--action-foreground` back to `var(--ta-ink)`.
+- Resolution date: none set. Revisit when the brand orange or the label treatment is next reviewed.
+- Test handling: the homepage axe test waives only `color-contrast` for `.site-action.primary`; a unit test pins the ratio at about 2.69:1.
+- Out of scope: the TeacherActive app, which needs its own follow-up.
 
 ## Component page layout
 
