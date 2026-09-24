@@ -13,7 +13,7 @@ Keep Next.js App Router and Fumadocs, but build with `output: 'export'`. GitHub 
 
 Use `trailingSlash: true` so exported pages resolve through directory indexes. Disable Next.js runtime image optimisation (`images.unoptimized: true`) and serve the supplied logos locally. Generate all dynamic documentation routes at build time using the installed Next.js/Fumadocs static-generation APIs.
 
-The default deployment is a project site for repository `leslie-sibanda/TA-design-system`, with base path `/TA-design-system`. The expected URL is `https://leslie-sibanda.github.io/TA-design-system/`; this is a target, not a claim that Pages has been configured. Derive and validate the build-time base path explicitly. A custom domain or repository rename requires rebuilding with the corresponding path configuration.
+The default deployment is a project site for repository `leslie-sibanda/ta-design-system`, with base path `/ta-design-system`. The expected URL is `https://leslie-sibanda.github.io/ta-design-system/`; this is a target, not a claim that Pages has been configured. Derive and validate the build-time base path explicitly. A custom domain or repository rename requires rebuilding with the corresponding path configuration.
 
 Navigation, images, client-side search fetches, downloadable Markdown and registry links must respect the base path. Do not use a single-page-app 404 redirect workaround: real exported pages must support direct visits and reloads.
 
