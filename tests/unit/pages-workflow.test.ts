@@ -17,7 +17,7 @@ describe('reusable Pages delivery contract', () => {
     expect(caller.jobs.verify.permissions).toBeUndefined();
     expect(verification.on).toHaveProperty('workflow_call');
     expect(verification.jobs.verify.permissions).toEqual({ contents: 'read' });
-    expect(verification.jobs.verify.strategy.matrix.base_path).toEqual(['', '/TA-design-system']);
+    expect(verification.jobs.verify.strategy.matrix.base_path).toEqual(['', '/ta-design-system']);
     expect(verification.jobs.verify.steps.some((step: { run?: string }) => step.run === 'pnpm check')).toBe(true);
     expect(verification.jobs.verify.env.PLAYWRIGHT_PROJECTS).toBeUndefined();
   });
@@ -36,7 +36,7 @@ describe('reusable Pages delivery contract', () => {
     expect(deploy.steps.some((step: { run?: string }) => step.run?.includes('build'))).toBe(false);
     const upload = verification.jobs.verify.steps.find((step: { uses?: string }) => step.uses?.startsWith('actions/upload-pages-artifact@'));
     expect(upload.with.path).toBe('out');
-    expect(upload.if).toContain("matrix.base_path == '/TA-design-system'");
+    expect(upload.if).toContain("matrix.base_path == '/ta-design-system'");
     expect(upload.if).toContain("github.event_name != 'pull_request'");
   });
   it('pins external actions to immutable revisions', () => {
