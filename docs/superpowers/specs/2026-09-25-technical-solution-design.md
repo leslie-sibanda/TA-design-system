@@ -154,7 +154,7 @@ All Miro work targets the live set of boards (`uXjVHin…`). The duplicate set (
 
 Published on 2026-09-25 to the live Miro boards:
 
-- System Architecture diagram: https://miro.com/app/board/uXjVHin2SLs=/?moveToWidget=3458764684950607465
+- Architecture diagrams (product view, delivery pipeline, contribution and release flow): see [`docs/architecture/diagrams.md`](../../architecture/diagrams.md). The first Mermaid diagram was replaced by these frames and removed from the board.
 - Technical Brainstorm frames and summary doc: https://miro.com/app/board/uXjVHin2_0U=/?moveToWidget=3458764643469371082
 
 **Deviations from section 5**

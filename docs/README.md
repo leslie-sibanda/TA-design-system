@@ -11,6 +11,7 @@ This directory records the product, architecture, security, and delivery decisio
 - [Repository boundaries](./architecture/repository-boundaries.md)
 - [Documentation-site architecture](./architecture/documentation-site.md)
 - [Component Markdown and agent access](./architecture/component-markdown.md)
+- [Architecture diagrams (Miro)](./architecture/diagrams.md)
 - [Component taxonomy](./domain/component-taxonomy.md)
 - [Theme model](./domain/theme-model.md)
 - [Digital brand language](./domain/brand-language.md)
