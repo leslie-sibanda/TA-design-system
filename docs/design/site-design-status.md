@@ -136,6 +136,8 @@ The [scaffold plan](../superpowers/plans/2026-09-23-nextjs-site-scaffold.md) inc
 
 ## Next implementation steps
 
+The full task list, with what is done and what is left, is in the [delivery roadmap](../../delivery/backlog/roadmap.md). The steps below are the original summary.
+
 1. Review the deployed scaffold and investigate the root-path mobile focus-trap test that passed on retry in run 36111601605.
 2. Implement canonical Base UI components, confirm their APIs and replace proposal-only examples with live previews.
 3. Build the scoped Styling canvas from those shared components and theme mappings.
