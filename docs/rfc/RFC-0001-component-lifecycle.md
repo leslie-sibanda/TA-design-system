@@ -19,6 +19,17 @@ Define one path from component request to supported release across packages, reg
 8. **Release:** version package and registry outputs together, then update static agent records and search indexes. External MCP is deferred under ADR-0007.
 9. **Maintenance:** track deprecations and provide migrations before removal.
 
+## Decision owners
+
+Agreed by the repository owner on 2026-09-25.
+
+| Decision | Owner | Lifecycle step |
+| --- | --- | --- |
+| Whether a request belongs in shared UI, a token or theme, or stays in the application | Application Dev Team | Before 2, Contract |
+| Brand sign-off when visuals or tokens change | Marketing | Between 2, Contract, and 3, Implementation |
+| Review of API, visual, accessibility, QA and security findings | Marketers and developers | 7, Review |
+| Release approval | Developers | Before 8, Release |
+
 ## Stability levels
 
 - **Experimental:** API may change; excluded from the default registry catalogue.

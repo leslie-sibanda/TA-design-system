@@ -93,7 +93,8 @@ Each row cites the repository document that holds the decision. A row marked **G
 | §11 Milestones | Seven delivery slices | Section 4 of this document | Slice 1 complete | 1 to 7 |
 | §12 Metrics | Components implemented, adoption, time saved, accessibility passing, AI tasks grounded | Accessibility checks (axe) run in `pnpm check` locally and are configured for CI, which has never run on GitHub. **Gap:** no mechanism defined for adoption, time saved or grounded AI tasks | Partial | 7 |
 | §13 Questions | Agent access level after the static and WebMCP foundation | ADR-0007; `security/agent-access-policy.md` (read-only, no writes, no secrets; any wider access needs a new ADR and threat model) | Decided | 6, 7 |
-| §13 Questions | First adopters, first release components, governance, sign-off | None yet | **Gap** | 0 |
+| §13 Questions | Governance and sign-off: scope decision, brand sign-off, review, release approval | RFC-0001 "Decision owners" (agreed 2026-09-25) | Decided | 0 |
+| §13 Questions | First adopters, first release components | None yet | **Gap** | 0 |
 | §13 Risks | Docs-only outcome, teams bypass the system, examples drift, brand drift, poor AI output, stale iteration | Canonical-source rule (ADR-0002), RFC-0001, RFC-0002, static generation from canonical content. **Gap:** no mitigation for "stale development and iteration on the site" | Partial | 2 to 7 |
 
 ## 4. Build order
@@ -132,7 +133,7 @@ All Miro work targets the live set of boards (`uXjVHin…`). The duplicate set (
 **Open questions**
 
 1. Which products adopt first, Client Portal or New Tabs? This decides which components slice 2 builds first (brief §13).
-2. Who owns governance, contribution review and release approval, and how do design, marketing and development sign off brand changes (brief §13)? RFC-0001 (proposed) names the Design System Team as owner and has a review step for API, visual, accessibility, QA and security findings, but it does not cover brand sign-off by marketing and design or release approval.
+2. **Resolved 2026-09-25.** Governance owners are recorded in RFC-0001 "Decision owners": the Application Dev Team decides scope, Marketing gives brand sign-off, marketers and developers review, and developers approve releases. The Miro "Contribution and release flow" shows them per step.
 3. **Slice order.** The brief puts the registry (5) before Markdown (6); `docs/design/site-design-status.md` puts Markdown first. Both depend only on slices 2 and 3. Recommendation: build Markdown and `llms.txt` first, because it is cheaper and delivers agent value sooner, and run the registry in parallel once slice 2 lands.
 4. How will adoption, time saved and grounded AI tasks be measured (brief §12)? Nothing is defined.
 5. What is the mitigation for "stale development and iteration on the site" (brief §13)? The brief names the risk but no mechanism.
