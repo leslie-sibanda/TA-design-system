@@ -3,7 +3,7 @@
   --surface: var(--ta-white);
   --heading: var(--ta-blue);
   --action: var(--ta-orange);
-  /* Design-owner-approved accessible foreground; preview history is unchanged. */
-  --action-foreground: var(--ta-ink);
+  /* Brand hierarchy: white on orange (2.69:1). Recorded accessibility exception in docs/design/site-design-status.md. */
+  --action-foreground: var(--ta-white);
   --focus-ring: var(--ta-blue);
 }

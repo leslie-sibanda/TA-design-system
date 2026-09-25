@@ -46,7 +46,7 @@ Use the installed React best-practices, composition-patterns, web-design-guideli
 
 Use test-driven development at agreed public boundaries: routes and navigation, component interactions, theme CSS export, static content contracts and read-only agent records. Implement one failing behavioural test and its minimal passing change at a time. Do not substitute snapshots of implementation details for observable behaviour.
 
-Automated testing supplements visual, keyboard and screen-reader review. The existing white-on-orange contrast issue remains a release blocker; a green pipeline must not be manufactured by disabling contrast checks.
+Automated testing supplements visual, keyboard and screen-reader review. The white-on-orange primary button is a recorded, accepted exception (`docs/design/site-design-status.md`). Only the `color-contrast` rule is waived, and only for that one button; a green pipeline must not be manufactured by disabling contrast checks anywhere else.
 
 ## Alternatives considered
 

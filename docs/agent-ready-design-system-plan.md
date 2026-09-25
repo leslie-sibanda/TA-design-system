@@ -281,7 +281,7 @@ Translate the supplied 2025 TeacherActive brand guide into a digital interface s
 - Icons use the approved blue/orange treatment and consistent optical size. Generic icon libraries may provide geometry only when the result matches the brand icon rules.
 - Photography and illustration follow the brand guide's education, people, diversity, and candid-workplace direction. Decorative assets remain separate from functional icons.
 
-Readable labels in the supplied screenshots confirm TA Blue `#005292`, TA Orange `#F57D00` and the Arial typography direction. Do not sample rendered pixels to derive production tokens. Remaining palette details and clear-space rules still need verification. Supplied raster logos and provenance are recorded in the [asset inventory](./design/assets/README.md); use approved vector originals when available. The [design status](./design/site-design-status.md) records the unresolved white-on-orange contrast issue.
+Readable labels in the supplied screenshots confirm TA Blue `#005292`, TA Orange `#F57D00` and the Arial typography direction. Do not sample rendered pixels to derive production tokens. Remaining palette details and clear-space rules still need verification. Supplied raster logos and provenance are recorded in the [asset inventory](./design/assets/README.md); use approved vector originals when available. The [design status](./design/site-design-status.md) records the white-on-orange contrast exception, accepted and confirmed by the design owner on 2026-09-25.
 
 ### Token model
 

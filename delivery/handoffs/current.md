@@ -10,7 +10,7 @@ Implemented routes: homepage, component catalogue and four proposal pages, Found
 
 ## Decisions and verification
 
-- The owner approved dark `#182B3A` text on the original `#F57D00` orange for the app. Historical previews retain the earlier white-text proposal.
+- DEV-5: the design-system site's primary button is orange with a white label, per the brand colour hierarchy. White on `#F57D00` is 2.69:1, so this is a recorded accessibility exception accepted by the requester and confirmed by the design owner on 2026-09-25 (see `docs/design/site-design-status.md`), replacing the 2026-09-23 dark-on-orange decision. Alternatives tried and rejected: a darker orange (off-brand) and a blue button (not an orange background). The TeacherActive app is out of scope and needs its own follow-up.
 - The browser test server uses port 4173 because another local service occupies 3000.
 - Local tests use one browser worker to reduce contention with other development processes.
 - Observed failing tests before implementing path validation, export serving, homepage identity, route navigation and static search behaviour.
