@@ -6,7 +6,7 @@ Every stable component page includes:
 
 - Purpose and when to use or avoid it.
 - Live preview using canonical package source.
-- Package and registry installation instructions.
+- Registry installation instructions, including npm dependencies and related registry items.
 - Basic usage with complete imports.
 - Public API and default values.
 - Variants, states, responsive behaviour, and theming guidance.

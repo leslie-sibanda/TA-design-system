@@ -24,6 +24,9 @@ This directory records the product, architecture, security, and delivery decisio
 - [ADR-0005: WebMCP component documentation](./adr/ADR-0005-webmcp-component-documentation.md)
 - [ADR-0006: GitHub Pages static deployment](./adr/ADR-0006-github-pages-static-deployment.md)
 - [ADR-0007: WebMCP and static documentation; defer external MCP](./adr/ADR-0007-static-agent-access-without-external-mcp.md)
+- [ADR-0008: Motion for shared animation](./adr/ADR-0008-motion-library-and-shared-animations.md)
+- [ADR-0009: Canonical home for shared UI and motion](./adr/ADR-0009-canonical-home-for-shared-ui-and-motion.md)
+- [ADR-0010: Shadcn registry-only distribution](./adr/ADR-0010-shadcn-registry-only-distribution.md)
 
 ## Proposed implementation contracts
 

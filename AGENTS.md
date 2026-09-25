@@ -16,6 +16,7 @@ Before changing code or documentation, read:
 - Generic component implementations belong in `packages/ui/`.
 - Primitive and semantic tokens belong in `packages/tokens/`.
 - App theme mappings belong in `packages/themes/`.
+- Shared animation presets belong in `packages/motion/`; import `motion` only there ([ADR-0008](docs/adr/ADR-0008-motion-library-and-shared-animations.md)).
 - Reusable product compositions belong in `packages/patterns/` only after reuse is demonstrated.
 - Registry files describe or package canonical source; generated registry output is never edited by hand.
 - Public documentation belongs in `content/docs/`; engineering decisions belong in `docs/`.

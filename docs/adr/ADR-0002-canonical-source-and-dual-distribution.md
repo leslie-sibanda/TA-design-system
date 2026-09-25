@@ -1,6 +1,6 @@
 # ADR-0002: Use One Canonical Source with Dual Distribution
 
-- **Status:** Accepted
+- **Status:** Accepted; the npm channel is superseded by [ADR-0010](./ADR-0010-shadcn-registry-only-distribution.md)
 - **Date:** 2026-09-21
 
 ## Context

@@ -7,6 +7,7 @@
 | `packages/ui` | Generic component APIs, composition, state styling | Product workflows or app colour values |
 | `packages/tokens` | Primitive and semantic token contracts | Component markup or app-specific screens |
 | `packages/themes` | Base-brand and app token mappings | Behaviour changes or component forks |
+| `packages/motion` | The only `motion` import, shared animation presets, reduced-motion behaviour | Component markup, app-specific choreography or Motion+ dependencies |
 | `packages/patterns` | Reusable cross-app compositions | Single-app business logic |
 | `content/docs` | Published documentation content | Architecture decisions or generated registry files |
 | `docs` | Product, architecture, standards, security, ADRs, RFCs | Runtime implementation |
