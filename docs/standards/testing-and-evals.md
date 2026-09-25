@@ -13,10 +13,11 @@ Test WebMCP discovery and read-only retrieval where supported, plus ordinary HTT
 - Type-check all packages and applications.
 - Unit-test component state and utility logic.
 - Integration-test Base UI wrappers and composed behaviour.
-- Contract-test package exports, registry schemas, registry installation, static routes and WebMCP tool schemas.
-- Run automated accessibility checks for every component state.
-- Run browser tests for keyboard interaction, overlays, forms, responsive layout, and WebMCP fallbacks.
-- Build the documentation site, packages, public agent records and registry payloads from a clean checkout.
+- Contract-test registry schemas, registry item dependencies, static routes and WebMCP tool schemas. Enforce the import boundaries in `docs/architecture/repository-boundaries.md`, including that only the motion module imports `motion`.
+- Registry smoke test: install every stable item from the built static registry into a clean fixture project, then type-check and build that project. Run it against the artifact served under the configured base path.
+- Pair each component with a unit test and an accessibility test that covers every documented state. Run axe in a real browser so contrast, focus and forced-colour rules are evaluated, not skipped.
+- Run browser tests for keyboard interaction, overlays, forms, responsive layout, and WebMCP fallbacks. Run them with reduced motion on and off, with forced colours, and at desktop and phone viewports with touch. Fail on console errors and sideways page overflow.
+- Build the documentation site, public agent records and registry payloads from a clean checkout.
 
 ## Theme verification
 

@@ -266,7 +266,7 @@ Use the installed frontend skills and TDD. GitHub Actions verifies pull requests
 - Build generic TeacherActive components on unstyled Base UI primitives. Base UI owns keyboard interaction, focus management, ARIA behaviour, positioning, and popup mechanics.
 - Own the component API, styling, tokens, tests, documentation, and release lifecycle under the `@teacheractive` namespace.
 - Use HeroUI as a quality reference for polished component anatomy, state coverage, documentation, and theme ergonomics. Do not inherit its default visual language, dependency graph, or component API.
-- Use the shadcn registry schema and CLI for copy-into-project installation. Publish the same source as workspace/npm packages for applications that prefer managed shared dependencies.
+- Use the shadcn registry schema and CLI as the only consumer distribution channel ([ADR-0010](./adr/ADR-0010-shadcn-registry-only-distribution.md)). `packages/*` stay private workspace packages; nothing is published to npm or GitHub Packages.
 
 ### Brand translation
 
@@ -334,20 +334,14 @@ Complex product features such as booking approval, vetting records, callback req
 
 ### Distribution contracts
 
-Support both consumption models from the same source:
-
-```ts
-import { Button } from "@teacheractive/ui/button";
-import { TeacherActiveThemeProvider } from "@teacheractive/themes";
-import "@teacheractive/themes/apps/<app-id>.css";
-```
+Consumers install from the registry, generated from the canonical `packages/` source ([ADR-0010](./adr/ADR-0010-shadcn-registry-only-distribution.md)):
 
 ```bash
 pnpm dlx shadcn@latest add @teacheractive/button
 pnpm dlx shadcn@latest add @teacheractive/theme-<app-id>
 ```
 
-Workspace/npm packages provide controlled upgrades across known TeacherActive applications. Registry installation provides source ownership for standalone projects and agent-driven scaffolding. Both outputs must be generated and tested from `packages/` source in the same release.
+Registry installation gives each application ownership of the installed files, and suits standalone projects and agent-driven scaffolding. Registry output must be generated from `packages/` source and tested by installing into a clean project. Consumers receive changes by re-adding items, guided by a per-release changelog.
 
 ## Documentation experience
 
@@ -470,7 +464,7 @@ The repository instructions must define precedence clearly: the user request com
 - The site remains usable when WebMCP is unavailable.
 - Search returns both documentation pages and component registry items.
 - Component source shown in the docs matches the source distributed by the registry.
-- Package and registry installation produce equivalent component APIs and styling contracts.
+- Registry installation produces the same component APIs and styling contracts as the docs preview.
 - Every shared component renders its documented states in every supported app theme without component-level forks.
 - Theme overrides pass contrast, focus visibility, forced-colours, reduced-motion, text-scaling, and keyboard checks.
 - The theme lab discovers every registered app theme from the theme manifest and catches visual regressions across the full set.

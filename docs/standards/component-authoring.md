@@ -13,6 +13,7 @@
 
 - Use Base UI primitives for supported interactive behaviour.
 - Style through TeacherActive semantic or component tokens.
+- Animate through `@teacheractive/motion` presets or the motion tokens. Give every animation a reduced-motion variant that reaches the same end state, and a non-gesture alternative for drag or swipe ([ADR-0008](../adr/ADR-0008-motion-library-and-shared-animations.md)).
 - Use app themes for presentation differences and patterns for reusable workflows.
 - Keep layout classes with the consumer when layout is not intrinsic to the component.
 - Avoid hidden dependencies on app routing, data fetching, authentication, or global state.
