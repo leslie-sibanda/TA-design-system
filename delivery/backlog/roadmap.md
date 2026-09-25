@@ -1,7 +1,7 @@
 # Delivery roadmap
 
 - **Recorded:** 2026-09-25
-- **Sources:** the approved [design preview](../../docs/design/preview/index.html) and [design status](../../docs/design/site-design-status.md), the [master plan](../../docs/agent-ready-design-system-plan.md), the Motion Kit review, ADR-0008 to ADR-0010 and the [layered motion system design](../../docs/superpowers/specs/2026-09-25-layered-motion-system-design.md)
+- **Sources:** the approved [design preview](../../docs/design/preview/index.html) and [design status](../../docs/design/site-design-status.md), the [master plan](../../docs/agent-ready-design-system-plan.md), the Motion Kit review, ADR-0008 to ADR-0010, the [layered motion system design](../../docs/superpowers/specs/2026-09-25-layered-motion-system-design.md), and the Miro [DS Technical Solution Design](https://miro.com/app/dashboard/space/79YvboryTV8sZzzqDLdR6e) space (Product Brief, Requirements, Technical Brainstorm and System Architecture boards)
 
 This is the working task list: what exists, what is left, and the order to take it in. Decisions live in ADRs and the design status; this file tracks delivery only. Tick an item only when the evidence it names exists.
 
@@ -10,6 +10,24 @@ This is the working task list: what exists, what is left, and the order to take 
 ## Where we are
 
 The documentation site is built, tested and deployed, and the architecture is written down. No shared component, motion preset, registry item, app theme or agent record exists yet. Every component page is still a proposal. The next work is foundations and the motion pilot, then real components, then the registry that distributes them.
+
+## Relation to the Miro space
+
+The Miro boards hold the technical requirement diagrams. They were drawn on 2026-09-25, before ADR-0008 to ADR-0010, so the repository and the boards disagree in these places. The repository's ADRs take precedence; the boards need updating to match.
+
+| Miro says | Repository now says | Board to update |
+| --- | --- | --- |
+| UI components reach apps as "npm packages via GitHub Packages"; release publishes packages and registry together; "npm packages via GitHub Packages" is a Must have | Registry only, nothing published to npm (ADR-0010) | System Architecture (product view, delivery pipeline, contribution flow), Requirements |
+| No motion layer; the layered motion system is a Nice to have | Motion is decided and owned here (ADR-0008), with a pilot planned | System Architecture, Requirements |
+| No mention of the Motion Kit | This repository is the canonical home for shared UI and motion (ADR-0009) | Technical Brainstorm summary |
+| Summary lists ADR-0001 to ADR-0007 and "dual distribution" | ADR-0008 to ADR-0010 exist; ADR-0002 partly superseded | Technical Brainstorm summary |
+| Owner decision: dark text on orange (2026-09-23) | White on orange, recorded exception (2026-09-25) | Technical Brainstorm summary |
+| Current state: CI never run on GitHub, Pages not deployed | CI runs on every PR and main; the site is live | Technical Brainstorm current state and summary |
+| Design Principles frame is empty | Principles exist in the ADRs and AGENTS.md | Technical Brainstorm |
+
+Build order differs too. Miro's slices run components (2), live previews (3), themes, Styling and theme lab (4), registry (5), Markdown and `llms.txt` (6), WebMCP and adoption (7), and the brainstorm recommends Markdown before the registry. This roadmap puts the registry before themes and agent access last. The order needs one agreed answer; see Phase 0.
+
+The Miro slices map onto this roadmap as follows: slice 0 and 1 are done; slice 2 is Phases 1 to 3; slice 3 is Phase 3; slice 4 is Phases 5 and 6; slice 5 is Phase 4; slices 6 and 7 are Phase 7.
 
 ## Done
 
@@ -71,6 +89,11 @@ The documentation site is built, tested and deployed, and the architecture is wr
 - [ ] Record in ADR-0010 the trigger for revisiting private packages (drift or upgrade pain in a second app, or an urgent accessibility or security fix)
 - [ ] Investigate the phone focus-trap test that passed only on retry in run 36111601605
 - [ ] Verify branch protection and required checks on `main`, and the `github-pages` environment restriction
+- [ ] Update the Miro boards to match ADR-0008 to ADR-0010 (see the table above)
+- [ ] Agree one build order across Miro and this roadmap, including whether Markdown comes before the registry
+- [ ] Choose the first adopter app: Client Portal or New Tabs (Product Brief section 13). The first app theme follows from it
+- [ ] Choose the first-release components (Product Brief section 13)
+- [ ] Record the owners agreed on 2026-09-25 in RFC-0001: the application dev team decides shared or app-specific, Marketing signs off brand changes, marketers and developers review, developers approve releases
 
 ### Phase 1: foundations
 
@@ -115,7 +138,7 @@ The documentation site is built, tested and deployed, and the architecture is wr
 ### Phase 5: app themes and app examples
 
 - [ ] Accept RFC-0002 on the first registered app theme
-- [ ] First app theme (for example `client-portal`) as a token mapping, not a component fork
+- [ ] First app theme, for the chosen first adopter (Client Portal or New Tabs), as a token mapping, not a component fork
 - [ ] Themes page and theme lab from the preview: every component state in every registered theme
 - [ ] App example click-through: switch between each app's theme on the same examples
 - [ ] Phone version of every app example, verified at a phone viewport with touch and reduced motion
@@ -135,12 +158,28 @@ The documentation site is built, tested and deployed, and the architecture is wr
 - [ ] Read-only WebMCP tools, feature-detected, with a plain-HTTP fallback
 - [ ] Agent evaluations from the testing standard
 
+### Pipeline and quality (from the Miro delivery pipeline and requirements)
+
+These can run alongside any phase.
+
+- [ ] PR template, and automated PR review
+- [ ] Formatting check, CodeQL, secret scanning and a dependency audit in CI (Should have: security scanning)
+- [ ] Define what integration tests cover (the pipeline marks them "not yet defined")
+- [ ] Post-deploy smoke test against the live URL
+- [ ] Release tags and release notes (tag `v0.0.2` exists; agree the convention with the registry changelog)
+- [ ] Staging target with acceptance tests and an environment approval gate
+- [ ] Supported browsers policy, which also settles how much WebKit coverage is required
+- [ ] Versioning and deprecation policy for registry items and tokens
+
 ### Ongoing
 
 - [ ] Manual screen-reader review of the site and of each component
 - [ ] Revisit the orange button exception with the brand team by 2026-12-31
 - [ ] The TeacherActive app's own button contrast follow-up (out of scope for this site)
 - [ ] Repository agent files from the plan: `CLAUDE.md`, `SECURITY.md`, `.agents/skills/`
+- [ ] Decide how adoption, time saved and grounded AI tasks are measured (Product Brief section 12)
+- [ ] Support channel for app teams
+- [ ] A release cadence that counters the "stale iteration" risk in the Product Brief
 
 ## Order and dependencies
 
