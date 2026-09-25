@@ -3,11 +3,8 @@ import AxeBuilder from '@axe-core/playwright';
 const base = process.env.SITE_BASE_PATH ?? '';
 test('homepage has no automated accessibility violations', async ({ page }) => {
   await page.goto(`${base}/`);
-  // Recorded exception (docs/design/site-design-status.md): white on brand orange is about 2.69:1, so only
-  // the colour-contrast rule is waived, and only for the orange action. Everything else is fully scanned.
-  const orangeAction = '.site-action.primary';
-  expect((await new AxeBuilder({ page }).exclude(orangeAction).analyze()).violations).toEqual([]);
-  expect((await new AxeBuilder({ page }).include(orangeAction).disableRules(['color-contrast']).analyze()).violations).toEqual([]);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
 });
 test('homepage identifies the design system', async ({ page }) => {
   await page.goto(`${base}/`);

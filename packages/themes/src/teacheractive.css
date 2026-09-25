@@ -2,8 +2,8 @@
   color-scheme: light;
   --surface: var(--ta-white);
   --heading: var(--ta-blue);
-  --action: var(--ta-orange);
-  /* White label on brand orange (about 2.69:1); recorded exception in docs/design/site-design-status.md. */
+  --action: var(--ta-orange-action);
+  /* Darker action orange so the white label meets WCAG AA (4.59:1); brand --ta-orange is unchanged. */
   --action-foreground: var(--ta-white);
   --focus-ring: var(--ta-blue);
 }

@@ -13,20 +13,22 @@ const contrast = (a: string, b: string) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
-describe('action foreground token', () => {
-  it('is white on brand orange in the shared tokens and the TeacherActive theme', () => {
+describe('action colours', () => {
+  it('maps the action background and white foreground through tokens in the shared tokens and the TeacherActive theme', () => {
     for (const file of ['packages/tokens/src/semantic.css', 'packages/themes/src/teacheractive.css']) {
       const css = read(file);
-      expect(token(css, '--action'), file).toBe('var(--ta-orange)');
+      expect(token(css, '--action'), file).toBe('var(--ta-orange-action)');
       expect(token(css, '--action-foreground'), file).toBe('var(--ta-white)');
     }
-    expect(token(primitives, '--ta-orange')).toBe('#f57d00');
     expect(token(primitives, '--ta-white')).toBe('#ffffff');
   });
-  it('records the known white-on-orange contrast so it cannot silently get worse', () => {
-    expect(contrast('#ffffff', '#f57d00')).toBeCloseTo(2.69, 1);
+  it('keeps the brand orange unchanged', () => {
+    expect(token(primitives, '--ta-orange')).toBe('#f57d00');
   });
-  it('lets orange buttons take their label colour from the token only', () => {
-    expect(read('src/app/global.css')).toMatch(/\.site-action\.primary \{[^}]*color: var\(--action-foreground\)/);
+  it('meets WCAG AA for the white label on the action orange', () => {
+    expect(contrast(token(primitives, '--ta-white')!, token(primitives, '--ta-orange-action')!)).toBeGreaterThanOrEqual(4.5);
+  });
+  it('lets orange buttons take their colours from the tokens only', () => {
+    expect(read('src/app/global.css')).toMatch(/\.site-action\.primary \{[^}]*background: var\(--action\); color: var\(--action-foreground\)/);
   });
 });

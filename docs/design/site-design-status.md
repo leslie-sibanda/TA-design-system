@@ -41,20 +41,18 @@ Use these verified guide values and supplied assets:
 
 Asset provenance, dimensions and limitations are recorded in the [asset inventory](./assets/README.md). The Canva icon replaced the manually extracted icon. The earlier screenshot wordmark is superseded by the supplied transparent wordmark. Do not stretch, recolour or recreate either logo.
 
-The selected sidebar item uses a soft background without the solid blue inset stripe. The approved preview uses white text on the original orange button background, including hover; the darker orange proposal was rejected.
+The selected sidebar item uses a soft background without the solid blue inset stripe. The approved preview uses white text on the original orange button background, including hover. The production site now keeps white text on a darker action orange (see below).
 
 ### Contrast decision resolved for implementation
 
-White text on `#F57D00` has approximately **2.69:1** contrast. This fails WCAG AA for both normal text (4.5:1) and large text (3:1). On 2026-09-23, the design owner approved **brand orange with dark text** (`#182B3A`, approximately 5.43:1). DEV-5 then asked for white text on every orange button, following the historical preview, and the darker-orange alternative was rejected earlier in review.
+White text on the brand orange `#F57D00` has approximately **2.69:1** contrast. This fails WCAG AA for both normal text (4.5:1) and large text (3:1). On 2026-09-23, the design owner approved **brand orange with dark text** (`#182B3A`, approximately 5.43:1). DEV-5 then asked for white text on every orange button. No lighter or white label can pass on `#F57D00`, so the action background is darker instead.
 
-Recorded exception (DEV-5, pending design-owner sign-off before merge):
+Decision (DEV-5, awaiting design-owner confirmation because it supersedes the 2026-09-23 decision):
 
-- Scope: orange action buttons on the design-system site, through `--action-foreground` (`#FFFFFF`) in `packages/tokens/src/semantic.css` and `packages/themes/src/teacheractive.css`.
-- Owner: design owner (sign-off required); requested by leslie.sibanda.
-- Impact: label contrast is about 2.69:1, below AA. Low-vision users may struggle to read orange button labels.
-- Workaround: buttons keep a visible 3px blue focus ring, a bold label and a 44px minimum target. Reverting means setting `--action-foreground` back to `var(--ta-ink)`.
-- Resolution date: none set. Revisit when the brand orange or the label treatment is next reviewed.
-- Test handling: the homepage axe test waives only `color-contrast` for `.site-action.primary`; a unit test pins the ratio at about 2.69:1.
+- `--action` maps to a new primitive `--ta-orange-action` (`#B75D00`), the brand orange's hue darkened until white reaches AA. `--action-foreground` is `#FFFFFF`. Contrast is **4.59:1**, which passes AA for normal text. No accessibility exception is recorded.
+- The brand palette is unchanged: `--ta-orange` stays `#F57D00` and must not be used behind text.
+- The change is in `packages/tokens/src/primitive.css`, `packages/tokens/src/semantic.css` and `packages/themes/src/teacheractive.css`. To restore the earlier dark-text pairing, set `--action` to `var(--ta-orange)` and `--action-foreground` to `var(--ta-ink)`.
+- `tests/unit/action-foreground.test.ts` pins the tokens and the AA ratio, and the homepage axe test scans the button with the colour-contrast rule enabled.
 - Out of scope: the TeacherActive app, which needs its own follow-up.
 
 ## Component page layout

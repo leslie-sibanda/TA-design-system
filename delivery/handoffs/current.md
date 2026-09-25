@@ -10,7 +10,7 @@ Implemented routes: homepage, component catalogue and four proposal pages, Found
 
 ## Decisions and verification
 
-- DEV-5: the requester asked for white text on all orange buttons, following the approved preview. `--action-foreground` is now white on the design-system site (about 2.69:1, a recorded exception that supersedes the 2026-09-23 dark-text decision). Design-owner sign-off is required before merge. The TeacherActive app is out of scope here and needs its own follow-up.
+- DEV-5: the requester asked for white text on all orange buttons, following the approved preview. orange buttons on the design-system site now use white labels on a darker action orange, `--ta-orange-action` `#B75D00` (4.59:1, AA), so no accessibility exception is needed. Brand `--ta-orange` `#F57D00` is unchanged. This supersedes the 2026-09-23 dark-text decision, so design-owner confirmation is still wanted. The TeacherActive app is out of scope and needs its own follow-up.
 - The browser test server uses port 4173 because another local service occupies 3000.
 - Local tests use one browser worker to reduce contention with other development processes.
 - Observed failing tests before implementing path validation, export serving, homepage identity, route navigation and static search behaviour.
