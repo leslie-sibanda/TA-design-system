@@ -147,3 +147,10 @@ All Miro work targets the live set of boards (`uXjVHin…`). The duplicate set (
 - After each Miro write, the board is re-read and compared with this document.
 - The summary doc and this document are diffed on their decision lists (section 5).
 - Repository changes that follow from this design run the shared `pnpm check`, with `PLAYWRIGHT_PROJECTS=chromium,mobile,firefox` locally and all engines in CI.
+
+## 8. Published boards
+
+Published on 2026-09-25 to the live Miro boards:
+
+- System Architecture diagram: https://miro.com/app/board/uXjVHin2SLs=/?moveToWidget=3458764684950607465
+- Technical Brainstorm frames and summary doc: https://miro.com/app/board/uXjVHin2_0U=/?moveToWidget=3458764643469371082
