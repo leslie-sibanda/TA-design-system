@@ -10,7 +10,7 @@ Implemented routes: homepage, component catalogue and four proposal pages, Found
 
 ## Decisions and verification
 
-- DEV-5: the requester asked for white text on orange buttons, but white on `#F57D00` is 2.69:1 and no on-brand text colour passes AA on it. The requester chose the brand hierarchy's Design 2 pattern: the design-system site's primary button is now TA Blue with a white label (8.01:1, AA) and an orange bottom-border accent. This replaces the 2026-09-23 dark-on-orange decision, so design-owner confirmation is still wanted. No accessibility exception is recorded. The TeacherActive app is out of scope and needs its own follow-up.
+- DEV-5: the design-system site's primary button is orange with a white label, per the brand colour hierarchy. White on `#F57D00` is 2.69:1, so this is a recorded accessibility exception accepted by the requester on 2026-09-25 (see `docs/design/site-design-status.md`), replacing the 2026-09-23 dark-on-orange decision. Alternatives tried and rejected: a darker orange (off-brand) and a blue button (not an orange background). The TeacherActive app is out of scope and needs its own follow-up.
 - The browser test server uses port 4173 because another local service occupies 3000.
 - Local tests use one browser worker to reduce contention with other development processes.
 - Observed failing tests before implementing path validation, export serving, homepage identity, route navigation and static search behaviour.

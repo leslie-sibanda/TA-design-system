@@ -14,12 +14,11 @@ const contrast = (a: string, b: string) => {
 };
 
 describe('action colours', () => {
-  it('maps a blue action, white label and orange accent through tokens in the shared tokens and the TeacherActive theme', () => {
+  it('maps an orange action with a white label through tokens in the shared tokens and the TeacherActive theme', () => {
     for (const file of ['packages/tokens/src/semantic.css', 'packages/themes/src/teacheractive.css']) {
       const css = read(file);
-      expect(token(css, '--action'), file).toBe('var(--ta-blue)');
+      expect(token(css, '--action'), file).toBe('var(--ta-orange)');
       expect(token(css, '--action-foreground'), file).toBe('var(--ta-white)');
-      expect(token(css, '--action-accent'), file).toBe('var(--ta-orange)');
     }
   });
   it('keeps the brand palette unchanged', () => {
@@ -27,14 +26,13 @@ describe('action colours', () => {
     expect(token(primitives, '--ta-blue')).toBe('#005292');
     expect(token(primitives, '--ta-white')).toBe('#ffffff');
   });
-  it('meets WCAG AA for the white label on the blue action', () => {
-    expect(contrast(token(primitives, '--ta-white')!, token(primitives, '--ta-blue')!)).toBeGreaterThanOrEqual(4.5);
+  it('records the known white-on-orange contrast exception so it cannot silently get worse', () => {
+    expect(contrast(token(primitives, '--ta-white')!, token(primitives, '--ta-orange')!)).toBeCloseTo(2.69, 1);
   });
   it('lets the primary action take its colours from the tokens only', () => {
     const rule = read('src/app/global.css').match(/\.site-action\.primary \{([^}]*)\}/)?.[1] ?? '';
     expect(rule).toContain('background: var(--action)');
     expect(rule).toContain('color: var(--action-foreground)');
-    expect(rule).toContain('var(--action-accent)');
     expect(rule).not.toMatch(/#[0-9a-f]{3,8}\b/i);
   });
 });

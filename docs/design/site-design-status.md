@@ -41,18 +41,20 @@ Use these verified guide values and supplied assets:
 
 Asset provenance, dimensions and limitations are recorded in the [asset inventory](./assets/README.md). The Canva icon replaced the manually extracted icon. The earlier screenshot wordmark is superseded by the supplied transparent wordmark. Do not stretch, recolour or recreate either logo.
 
-The selected sidebar item uses a soft background without the solid blue inset stripe. The approved preview uses white text on the original orange button background, including hover. The production site's primary button is now TA Blue with white text and an orange accent (see below).
+The selected sidebar item uses a soft background without the solid blue inset stripe. The approved preview uses white text on the original orange button background, including hover. The production site's primary button uses white text on the original orange again, as a recorded exception (see below).
 
 ### Contrast decision resolved for implementation
 
-White text on the brand orange `#F57D00` has approximately **2.69:1** contrast, and TA Blue text on it is 2.98:1. Both fail WCAG AA (4.5:1 normal text, 3:1 large text), so no colour from the brand hierarchy passes on an orange background. On 2026-09-23, the design owner approved **brand orange with dark text** (`#182B3A`, approximately 5.41:1). DEV-5 asked for white text on every orange button. A darker orange tone was tried and rejected as off-brand.
+White text on the brand orange `#F57D00` has approximately **2.69:1** contrast, and TA Blue text on it is 2.98:1. Both fail WCAG AA (4.5:1 normal text, 3:1 large text), so no colour from the brand hierarchy passes on an orange background. On 2026-09-23, the design owner approved **brand orange with dark text** (`#182B3A`, approximately 5.41:1). DEV-5 asked for white text on every orange button, following the brand colour hierarchy. Alternatives were tried and rejected: a darker orange tone (off-brand) and a blue button with an orange accent (no longer an orange background, at 8.01:1).
 
-Decision (DEV-5, awaiting design-owner confirmation because it replaces the 2026-09-23 decision): follow the brand colour hierarchy's Design 2 pattern, a blue background with white text and orange as an accent.
+Recorded exception (DEV-5, accepted by the requester leslie.sibanda on 2026-09-25; it replaces the 2026-09-23 decision):
 
-- `--action` is TA Blue (`#005292`), `--action-foreground` is white (`#FFFFFF`) and `--action-accent` is TA Orange (`#F57D00`). White on blue is **8.01:1**, which passes AA. No accessibility exception is recorded.
-- The primary site button uses the accent as a 3px bottom border. Orange is never text or a text background.
-- The brand palette is unchanged. The change is in `packages/tokens/src/semantic.css`, `packages/themes/src/teacheractive.css` and `src/app/global.css`.
-- `tests/unit/action-foreground.test.ts` pins the tokens, the AA ratio and that the button rule uses tokens only. The homepage axe test scans the button with colour-contrast enabled.
+- Scope: the orange primary action on the design-system site. `--action` is `var(--ta-orange)` and `--action-foreground` is `var(--ta-white)` in `packages/tokens/src/semantic.css` and `packages/themes/src/teacheractive.css`. The brand palette is unchanged.
+- Owner: leslie.sibanda (accepted); the design owner should confirm before merge.
+- Impact: label contrast is about 2.69:1, below AA. Low-vision users may struggle to read orange button labels.
+- Workaround: the button keeps a bold label, a 44px minimum target and a visible 3px blue focus ring. Reverting to the AA-passing dark-text pairing means setting `--action-foreground` to `var(--ta-ink)`; a blue button means setting `--action` to `var(--ta-blue)`.
+- Resolution date: 2026-12-31 (proposed) to revisit the pairing with the brand team.
+- Test handling: the homepage axe test waives only `color-contrast` for `.site-action.primary`. A unit test pins the token values and the ratio at about 2.69:1.
 - Out of scope: the TeacherActive app, which needs its own follow-up.
 
 ## Component page layout

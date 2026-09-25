@@ -2,9 +2,8 @@
   color-scheme: light;
   --surface: var(--ta-white);
   --heading: var(--ta-blue);
-  --action: var(--ta-blue);
-  /* Blue primary button (brand hierarchy, Design 2): white label is 8.01:1; orange is accent only. */
+  --action: var(--ta-orange);
+  /* Brand hierarchy: white on orange (2.69:1). Recorded accessibility exception in docs/design/site-design-status.md. */
   --action-foreground: var(--ta-white);
-  --action-accent: var(--ta-orange);
   --focus-ring: var(--ta-blue);
 }
