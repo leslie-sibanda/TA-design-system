@@ -129,7 +129,7 @@ Prove the layering on three pieces of work before extending the catalogue:
 
 1. **A `Reveal` wrapper and a staggered list, built with Motion.** These exercise presets, token mapping, the reduced-motion variant and the bundle boundary, without touching Base UI's presence lifecycle.
 2. **Dialog, built on CSS tokens with no Motion.** This proves the CSS-first path on the component Base UI most expects to be animated that way, and keeps the overlay focus contract out of the vendor's hands.
-3. **One Motion-inside-Base-UI component, chosen from toasts or the tabs indicator.** This is where the `keepMounted` / `AnimatePresence` / `getAnimations()` path gets proven, including cancellation.
+3. **The Tabs sliding indicator.** Tabs is in the first-release set and toasts are not, so the indicator is the one Motion-inside-Base-UI case. This is where the `keepMounted` / `AnimatePresence` / `getAnimations()` path gets proven, including cancellation.
 
 Take them in that order. Each step should answer whether the next one is still the right shape.
 

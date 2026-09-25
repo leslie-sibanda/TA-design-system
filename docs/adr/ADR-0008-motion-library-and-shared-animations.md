@@ -46,7 +46,7 @@ Use Motion as the animation library for shared TeacherActive motion that CSS can
 
 ## Open items
 
-- Choose the pilot wrapper and pilot component.
+- Pilot chosen on 2026-09-25: `Reveal` and staggered-list wrappers, Dialog on CSS only, and the Tabs sliding indicator as the Motion-inside-Base-UI case.
 - Base UI detects the end of a Motion animation through `element.getAnimations()`, and needs a near-1 opacity such as `0.9999` if opacity is not animated. Prove the exit path with a test on the first overlay that uses Motion, including cancellation.
 - Decide whether reduced-motion variants use an instant change or a short opacity fade. Validate on the pilot for contrast and comfort.
 - This repository owns shared motion ([ADR-0009](./ADR-0009-canonical-home-for-shared-ui-and-motion.md)). The Motion Kit's hooks and keyframes are a reference.
