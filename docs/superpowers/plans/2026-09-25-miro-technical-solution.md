@@ -25,7 +25,7 @@
 
 ## Review Focus
 
-1. **Diagram widget unavailable.** The spec says the diagram widget's availability is per user, and an unavailable one is skipped without an error. A "successful" call could create nothing. Task 2 checks that a diagram item exists in the result and stops for a decision if not.
+1. **Diagram widget unavailable.** The Miro composer skill says a diagram widget's availability is per user, and an unavailable one is skipped without blocking other widgets. A "successful" call could create nothing. Task 2 checks that a diagram item exists in the result and stops for a decision if not.
 2. **A sparse frame update renames or resizes the template frame.** Task 3 keeps each frame's title and size and reads them back afterwards.
 3. **New stickies collide with the template's widget stack.** Each frame has an opaque stack at roughly x 1123 to 1250, y 34 to 193, whose stickies cannot be read. Task 3 keeps every new sticky at x + 199 <= 1090 and below y 110.
 4. **The summary doc overwrites content someone has added.** The owner can see content on the Technical Brainstorm board, and the doc read as empty on 2026-09-25. Task 4 re-reads the doc first and stops if it is no longer empty.

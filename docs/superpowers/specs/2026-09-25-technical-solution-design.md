@@ -91,8 +91,9 @@ Each row cites the repository document that holds the decision. A row marked **G
 | §10 Constraints | Static GitHub Pages, Base UI, tokens and themes, generated registry | ADR-0006, ADR-0001, ADR-0003, ADR-0002 | Decided | n/a |
 | §10 Constraints | Follow-on work: shared components, registry release checks, WebMCP registration, screen-reader review, real deployment | `delivery/handoffs/current.md` | Open | 0 to 7 |
 | §11 Milestones | Seven delivery slices | Section 4 of this document | Slice 1 complete | 1 to 7 |
-| §12 Metrics | Components implemented, adoption, time saved, accessibility passing, AI tasks grounded | Accessibility checks run in CI. **Gap:** no mechanism defined for adoption, time saved or grounded AI tasks | Partial | 7 |
-| §13 Questions | First adopters, first release components, governance, sign-off, agent access level | None yet | **Gap** | 0 |
+| §12 Metrics | Components implemented, adoption, time saved, accessibility passing, AI tasks grounded | Accessibility checks (axe) run in `pnpm check` locally and are configured for CI, which has never run on GitHub. **Gap:** no mechanism defined for adoption, time saved or grounded AI tasks | Partial | 7 |
+| §13 Questions | Agent access level after the static and WebMCP foundation | ADR-0007; `security/agent-access-policy.md` (read-only, no writes, no secrets; any wider access needs a new ADR and threat model) | Decided | 6, 7 |
+| §13 Questions | First adopters, first release components, governance, sign-off | None yet | **Gap** | 0 |
 | §13 Risks | Docs-only outcome, teams bypass the system, examples drift, brand drift, poor AI output, stale iteration | Canonical-source rule (ADR-0002), RFC-0001, RFC-0002, static generation from canonical content. **Gap:** no mitigation for "stale development and iteration on the site" | Partial | 2 to 7 |
 
 ## 4. Build order
@@ -116,7 +117,7 @@ Slices 5 and 6 both depend only on slices 2 and 3, so they can run in parallel. 
 
 All Miro work targets the live set of boards (`uXjVHin…`). The duplicate set (`uXjVHig…`) is an untouched template and is left alone. The Product Brief board is read only.
 
-1. **System Architecture** (`uXjVHin2SLs=`): a new frame containing the layered diagram from section 2, each box tagged Built, Decided (ADR) or Not built. Consuming apps appear as dashed placeholders. The external MCP server appears in a dashed box labelled "Deferred (ADR-0007)". The board's template diagram widget is left as is, because it is filled by Miro's own AI and cannot be driven from here.
+1. **System Architecture** (`uXjVHin2SLs=`): a diagram widget holding the layered diagram from section 2 (section 8 explains why it is not inside a frame), each box tagged Built, Decided (ADR) or Not built. Consuming apps appear as dashed placeholders. The external MCP server appears in a dashed box labelled "Deferred (ADR-0007)". The board's template diagram widget is left as is, because it is filled by Miro's own AI and cannot be driven from here.
 2. **Technical Brainstorm** (`uXjVHin2_0U=`): the four frames, each note citing its source.
    - Problem: brief §2 and §3.
    - Design Principles: `AGENTS.md` and ADR-0001 to ADR-0007.
@@ -148,9 +149,16 @@ All Miro work targets the live set of boards (`uXjVHin…`). The duplicate set (
 - The summary doc and this document are diffed on their decision lists (section 5).
 - Repository changes that follow from this design run the shared `pnpm check`, with `PLAYWRIGHT_PROJECTS=chromium,mobile,firefox` locally and all engines in CI.
 
-## 8. Published boards
+## 8. Published boards and known deviations
 
 Published on 2026-09-25 to the live Miro boards:
 
 - System Architecture diagram: https://miro.com/app/board/uXjVHin2SLs=/?moveToWidget=3458764684950607465
 - Technical Brainstorm frames and summary doc: https://miro.com/app/board/uXjVHin2_0U=/?moveToWidget=3458764643469371082
+
+**Deviations from section 5**
+
+- **Diagram not in a frame.** The System Architecture diagram is a titled Miro diagram widget. Wrapping it in a frame would mean recreating it, and Miro rejected re-parenting existing items. The widget carries its own title.
+- **Ten loose stickies, owner decision pending.** In the Technical Brainstorm board, the 4 Problem and 6 Design Principles stickies sit inside their frames visually but are not children of them, because the first write did not address the frames correctly. Moving one of those frames would leave its stickies behind. Fixing it means deleting the 10 stickies and recreating them inside the frames, which needs the owner's approval. The Current State and Future State stickies are correctly nested.
+- **Added after review.** Future State carries four open-question stickies and every Current State sticky cites a source, as section 5 requires. One Future State sticky ends 16 px from the template's widget stack; it does not overlap it.
+- **Sync unverified.** The summary doc is meant to sync to the System Architecture board's synced-copy frame. That frame exposes only its instruction text, so the sync could not be confirmed.
