@@ -2,7 +2,7 @@
 
 - **Recorded:** 2026-09-23
 - **Design status:** Accepted visual direction following interactive review
-- **Implementation status:** Next.js/Fumadocs static scaffold implemented on the implementation branch; shared components and agent exports remain pending
+- **Implementation status:** Next.js/Fumadocs static scaffold merged into `main` through PRs #1-#4 and deployed to GitHub Pages; shared components and agent exports remain pending
 
 This record captures the agreed documentation-site design and the remaining implementation work. It supplements the [master plan](../agent-ready-design-system-plan.md) and [documentation-site architecture](../architecture/documentation-site.md). Design approval does not approve an unimplemented component API or waive release checks.
 
@@ -124,7 +124,7 @@ Working companion sessions are under `.superpowers/brainstorm/`. Local sessions 
 
 A Superpowers visual-companion server serves the preview on a session-specific localhost port. It requires a session URL and stops after inactivity. Session keys and local browser links are not stable documentation URLs. Restarting the companion may create a new session directory; copy the latest HTML and assets when necessary.
 
-Prototype checks were limited to JavaScript syntax, selected template rendering, served-content checks and contrast calculations. The visual direction was reviewed interactively. The implementation now has type, lint, unit, exported-artifact, accessibility and browser checks; see the [current handoff](../../delivery/handoffs/current.md) for the exact verified scope. Manual screen-reader review and a real GitHub deployment remain pending.
+Prototype checks were limited to JavaScript syntax, selected template rendering, served-content checks and contrast calculations. The visual direction was reviewed interactively. The implementation now has type, lint, unit, exported-artifact, accessibility and browser checks; see the [current handoff](../../delivery/handoffs/current.md) for the exact verified scope. Manual screen-reader review remains pending. Main-branch run [36111601605](https://github.com/leslie-sibanda/ta-design-system/actions/runs/36111601605) passed both verification modes and deployed the site to [GitHub Pages](https://leslie-sibanda.github.io/ta-design-system/). WebKit passed `e2e/smoke.spec.ts` in both modes, not the full browser suite. The root-path mobile focus-trap check failed once and passed on retry.
 
 The Next.js/Fumadocs application includes the branded homepage, responsive navigation, static catalogue/detail routes and a generated static search index. Component pages clearly label proposed APIs rather than presenting them as released packages. Pages and Styling are honest placeholders. No shared component API, registry endpoint, Markdown HTTP endpoint, MCP server or WebMCP registration has been implemented. The historical prototype still uses its short preview search list and illustrative fixtures; its behaviour is not evidence of production functionality.
 
@@ -132,11 +132,11 @@ The Next.js/Fumadocs application includes the branded homepage, responsive navig
 
 Deploy the real site to GitHub Pages as a Next.js static export, as specified in [ADR-0006](../adr/ADR-0006-github-pages-static-deployment.md). Use the installed frontend skills, test-driven implementation and automated GitHub Actions verification/deployment. Static search and base-path handling are required. [ADR-0007](../adr/ADR-0007-static-agent-access-without-external-mcp.md) defers the external MCP server entirely; initial access is browser WebMCP plus public Markdown and `llms.txt`.
 
-The [scaffold plan](../superpowers/plans/2026-09-23-nextjs-site-scaffold.md) includes these requirements. The implementation uses a small GitHub Actions caller with separate reusable verification and deployment workflows, as requested by the owner. Repository Pages configuration and an actual deployment have not been performed.
+The [scaffold plan](../superpowers/plans/2026-09-23-nextjs-site-scaffold.md) includes these requirements. The implementation uses a small GitHub Actions caller with separate reusable verification and deployment workflows, as requested by the owner. PRs [#1](https://github.com/leslie-sibanda/ta-design-system/pull/1), [#2](https://github.com/leslie-sibanda/ta-design-system/pull/2), [#3](https://github.com/leslie-sibanda/ta-design-system/pull/3) and [#4](https://github.com/leslie-sibanda/ta-design-system/pull/4) are merged. GitHub Pages is configured and the latest `main` artifact is deployed.
 
 ## Next implementation steps
 
-1. Review the scaffold and run the GitHub workflow, including CI-only WebKit verification, before release.
+1. Review the deployed scaffold and investigate the root-path mobile focus-trap test that passed on retry in run 36111601605.
 2. Implement canonical Base UI components, confirm their APIs and replace proposal-only examples with live previews.
 3. Build the scoped Styling canvas from those shared components and theme mappings.
 4. Generate static Markdown and discovery records, then progressively enhance with read-only WebMCP tools. Do not build an external MCP server in the initial scope.
