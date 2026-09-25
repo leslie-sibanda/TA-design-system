@@ -2,8 +2,9 @@
   color-scheme: light;
   --surface: var(--ta-white);
   --heading: var(--ta-blue);
-  --action: var(--ta-orange-action);
-  /* Darker action orange so the white label meets WCAG AA (4.59:1); brand --ta-orange is unchanged. */
+  --action: var(--ta-blue);
+  /* Blue primary button (brand hierarchy, Design 2): white label is 8.01:1; orange is accent only. */
   --action-foreground: var(--ta-white);
+  --action-accent: var(--ta-orange);
   --focus-ring: var(--ta-blue);
 }

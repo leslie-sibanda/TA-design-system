@@ -20,7 +20,7 @@ TeacherActive interfaces should feel confident, direct, energetic, supportive, a
 
 Colour combinations must follow approved pairings. Blue and orange should not be blended into muddy gradients or used with insufficient contrast.
 
-The historical visual preview uses white button text on TA Orange, which measures approximately 2.69:1 and fails AA text contrast. The design owner approved dark `#182B3A` action labels on 2026-09-23; DEV-5 then requested white labels again. Buttons now use white on a darker action orange (`#B75D00`, 4.59:1) so they meet AA without an exception. See the [contrast decision](../design/site-design-status.md#contrast-decision-resolved-for-implementation). The brand orange stays `#F57D00`.
+The historical visual preview uses white button text on TA Orange, which measures approximately 2.69:1 and fails AA text contrast. The design owner approved dark `#182B3A` action labels on 2026-09-23; DEV-5 then requested white labels again. The primary button is now TA Blue with a white label (8.01:1) and an orange accent, following the colour hierarchy's Design 2 pattern, so it meets AA without an exception. See the [contrast decision](../design/site-design-status.md#contrast-decision-resolved-for-implementation). The brand orange stays `#F57D00`.
 
 ## Typography
 
