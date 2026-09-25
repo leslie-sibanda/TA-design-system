@@ -47,10 +47,10 @@ The selected sidebar item uses a soft background without the solid blue inset st
 
 White text on the brand orange `#F57D00` has approximately **2.69:1** contrast, and TA Blue text on it is 2.98:1. Both fail WCAG AA (4.5:1 normal text, 3:1 large text), so no colour from the brand hierarchy passes on an orange background. On 2026-09-23, the design owner approved **brand orange with dark text** (`#182B3A`, approximately 5.41:1). DEV-5 asked for white text on every orange button, following the brand colour hierarchy. Alternatives were tried and rejected: a darker orange tone (off-brand) and a blue button with an orange accent (no longer an orange background, at 8.01:1).
 
-Recorded exception (DEV-5, accepted by the requester leslie.sibanda on 2026-09-25; it replaces the 2026-09-23 decision):
+Recorded exception (DEV-5, accepted by the requester leslie.sibanda and confirmed by the design owner on 2026-09-25; it replaces the 2026-09-23 decision):
 
 - Scope: the orange primary action on the design-system site. `--action` is `var(--ta-orange)` and `--action-foreground` is `var(--ta-white)` in `packages/tokens/src/semantic.css` and `packages/themes/src/teacheractive.css`. The brand palette is unchanged.
-- Owner: leslie.sibanda (accepted); the design owner should confirm before merge.
+- Owner: the design owner, who confirmed this pairing; requested and accepted by leslie.sibanda.
 - Impact: label contrast is about 2.69:1, below AA. Low-vision users may struggle to read orange button labels.
 - Workaround: the button keeps a bold label, a 44px minimum target and a visible 3px blue focus ring. Reverting to the AA-passing dark-text pairing means setting `--action-foreground` to `var(--ta-ink)`; a blue button means setting `--action` to `var(--ta-blue)`.
 - Resolution date: 2026-12-31 (proposed) to revisit the pairing with the brand team.
